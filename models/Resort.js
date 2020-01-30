@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-
+const mongoose = require("mongoose");
+const Review = require("./Review");
 const ResortSchema = new mongoose.Schema({
   name: String,
   address: String,
@@ -13,10 +13,10 @@ const ResortSchema = new mongoose.Schema({
   ticketWebsite: String,
   phoneNumber: String,
   images: [String],
-  reviews: [Review.schema],
+  reviews: [Review.schema]
   // favCount: Number,
 });
 
-const Resort = mongoose.model('Resort', ResortSchema);
+const Resort = mongoose.model("Resort", ResortSchema);
 
 module.exports = Resort;
