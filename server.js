@@ -19,7 +19,23 @@ app.get("/api/v1/Users", (req, res) => {
         .status(400)
         .json({ message: "something went wrong!", err: err });
     }
-    response.status(200).json({ foundUsers });
+    res.status(200).json({ foundUsers });
+  });
+});
+
+app.post("/api/v1/Users", (req, res) => {
+  DB.User.create(req.body, (err, createdUser) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ message: "something went wrong!", err: err });
+    }
+    const resObj = {
+      status: 200,
+      data: createdUser,
+      requestedAt: new Date().toLocaleString()
+    };
+    res.status(200).json(resObj);
   });
 });
 

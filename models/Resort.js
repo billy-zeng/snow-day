@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Review = require("./Review");
+
 const ResortSchema = new mongoose.Schema({
   name: String,
   address: String,
