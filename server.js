@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 //————————————————————————— API Routes ——————————————————————————//
 
 app.use("/api/v1/users", routes.user);
+app.use("/api/v1/resorts", routes.resort);
 
 //————————————————————————— HTML Routes ——————————————————————————//
 
