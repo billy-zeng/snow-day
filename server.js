@@ -15,6 +15,10 @@ app.use(bodyParser.json());
 
 app.use("/api/v1/users", routes.user);
 
+//————————————————————————— HTML Routes ——————————————————————————//
+
+app.use("/", routes.views);
+
 //———————————————————————— Server Start —————————————————————————//
 app.listen(PORT, () => {
   console.log(`Server is listening at ${PORT}.`);
