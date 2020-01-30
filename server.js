@@ -13,9 +13,9 @@ app.use(bodyParser.json());
 //————————————————————————— API Routes ——————————————————————————//
 
 app.get("/api/v1/Users", (req, res) => {
-  DB.User.find({}, (err, response) => {
+  DB.User.find({}, (err, foundUsers) => {
     if (err) {
-      return response
+      return res
         .status(400)
         .json({ message: "something went wrong!", err: err });
     }
