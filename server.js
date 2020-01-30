@@ -14,8 +14,11 @@ app.use(bodyParser.json());
 //————————————————————————— API Routes ——————————————————————————//
 
 app.use("/api/v1/users", routes.user);
-
 app.use("/api/v1/resorts", routes.resort);
+
+//————————————————————————— HTML Routes ——————————————————————————//
+
+app.use("/", routes.views);
 
 //———————————————————————— Server Start —————————————————————————//
 app.listen(PORT, () => {
