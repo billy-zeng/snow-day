@@ -57,21 +57,33 @@ router.post("/", (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const updatedUser = await DB.User.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
-    const resObj = {
-      status: 200,
-      data: updatedUser,
-      requestedAt: new Date().toLocaleString()
-    };
-    res.status(200).json(resObj);
+    const updatedUser = await DB.User.findById(req.params.id);
+    console.log(updatedUser.userResorts);
+    updatedUser.userResorts.push("5e335dfcf2d01e5bb06234be");
+    updatedUser.save();
+    res.status(200).json(updatedUser);
   } catch (err) {
-    return res.status(500).json({ message: "something went wrong!", err: err });
+    return res.status(500).json({ message: "something went wrong", err: err });
   }
 });
+
+// router.put("/:id", async (req, res) => {
+//   try {
+//     const updatedUser = await DB.User.findByIdAndUpdate(
+//       req.params.id,
+//       req.body,
+//       { new: true }
+//     );
+//     const resObj = {
+//       status: 200,
+//       data: updatedUser,
+//       requestedAt: new Date().toLocaleString()
+//     };
+//     res.status(200).json(resObj);
+//   } catch (err) {
+//     return res.status(500).json({ message: "something went wrong!", err: err });
+//   }
+// });
 
 //————————————————————————————— Export —————————————————————————————//
 
