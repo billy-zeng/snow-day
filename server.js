@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 //————————————————————————— API Routes ——————————————————————————//
 
-app.get("/api/v1/Users", (req, res) => {
+app.get("/api/v1/users", (req, res) => {
   DB.User.find({}, (err, foundUsers) => {
     if (err) {
       return res
@@ -23,7 +23,7 @@ app.get("/api/v1/Users", (req, res) => {
   });
 });
 
-app.post("/api/v1/Users", (req, res) => {
+app.post("/api/v1/users", (req, res) => {
   DB.User.create(req.body, (err, createdUser) => {
     if (err) {
       return res
