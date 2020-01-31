@@ -58,7 +58,7 @@ router.post("/", (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const updatedUser = await DB.User.findById(req.params.id);
-    console.log(updatedUser.userResorts);
+    //console.log(updatedUser.userResorts);
     updatedUser.userResorts.push("5e335dfcf2d01e5bb06234be");
     updatedUser.save();
     res.status(200).json(updatedUser);
