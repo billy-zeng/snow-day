@@ -7,24 +7,21 @@ const bcrypt = require("bcryptjs");
 
 router.post("/", async (req, res) => {
   const userData = req.body;
-  //let hash;
-  // validate form complete
   try {
+    // validate form complete
     if (!req.body.username || !req.body.email || !req.body.password) {
       return res
         .status(400)
         .json({ message: "All fields are required for signup." });
     }
-
     // validate unique email
-
     const foundUser = await DB.User.findOne({ email: req.body.email });
     if (foundUser)
       return res.status(400).json({
         message:
           "This account already exists. Please use a different email address."
       });
-
+    // hash password and create user
     const hash = await bcrypt.hashSync(req.body.password, 10);
     userData.password = hash;
     const createdUser = await DB.User.create(userData);
@@ -85,24 +82,6 @@ router.put("/:id", async (req, res) => {
     return res.status(500).json({ message: "something went wrong", err: err });
   }
 });
-
-// router.put("/:id", async (req, res) => {
-//   try {
-//     const updatedUser = await DB.User.findByIdAndUpdate(
-//       req.params.id,
-//       req.body,
-//       { new: true }
-//     );
-//     const resObj = {
-//       status: 200,
-//       data: updatedUser,
-//       requestedAt: new Date().toLocaleString()
-//     };
-//     res.status(200).json(resObj);
-//   } catch (err) {
-//     return res.status(500).json({ message: "something went wrong!", err: err });
-//   }
-// });
 
 //————————————————————————————— Export —————————————————————————————//
 
