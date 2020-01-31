@@ -35,7 +35,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-//———————————————————————————— Create ————————————————————————————//
+//———————————————————————— Create / Signup ————————————————————————//
 
 router.post("/", (req, res) => {
   DB.User.create(req.body, (err, createdUser) => {
