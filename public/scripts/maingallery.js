@@ -1,4 +1,4 @@
-console.log('maingallery.js connected...');
+console.log('maingallery JS connected...');
 
 fetch('/api/v1/resorts', {
   method: 'GET'
