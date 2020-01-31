@@ -35,6 +35,17 @@ app.use("/api/v1/resorts", routes.resort);
 
 app.use("/", routes.views);
 
+//————————————————————————————— Verify —————————————————————————————//
+
+app.get("/api/v1/verify", (req, res) => {
+  if (!req.session.currentUser) {
+    return res
+      .status(401)
+      .json({ error: "unauthorized, please log in and try again." });
+  }
+  res.status(200).json(req.session.user);
+});
+
 //———————————————————————— Server Start —————————————————————————//
 app.listen(PORT, () => {
   console.log(`Server is listening at ${PORT}.`);
