@@ -1,12 +1,12 @@
-console.log('Signup JS connected...');
+console.log('Login JS connected...');
 
-const signupForm = document.getElementById('signupForm');
+const loginForm = document.getElementById('loginForm');
 
 // Submit Event Listener
-signupForm.addEventListener('submit', handleSignupSubmit);
+loginForm.addEventListener('submit', handleLoginSubmit);
 
-// Handle Signup Submit
-function handleSignupSubmit(event) {
+// Handle Login Submit
+function handleLoginSubmit(event) {
   let formIsValid = true;   // track form validation
   const userData = {};    // user data object
   event.preventDefault();   // prevent default page refresh
@@ -15,37 +15,24 @@ function handleSignupSubmit(event) {
   document.querySelectorAll('.alert').forEach((alert) => alert.remove());
 
   // check each input field
-  const formInputs = [...signupForm.elements];    // array of input form elements
+  const formInputs = [...loginForm.elements];    // array of input form elements
   formInputs.forEach((input) => {
     input.classList.remove('input-error');    // clear red bordering
 
-    let emptyField = false;   // if input doesn't pass first check don't display other error messages
+    let emptyField = false;
 
     // create error message template div
     const errorMessage = document.createElement('div');
     errorMessage.setAttribute('class', 'alert error-message');
 
-    // check if input field is empty; checks username, email, password
+    // check if email or password fields are empty
     if (input.type === 'text' && input.value === '') {
       formIsValid = false;
       emptyField = true;
       // add red border to input
       input.classList.add('input-error');
       console.log(`Please enter your ${input.name}. `);
-      if (input.name === 'email') {
-        errorMessage.insertAdjacentHTML('beforeend', `<p>Please enter an email address. </p>`);
-      } else{
-      errorMessage.insertAdjacentHTML('beforeend', `<p>Please enter a ${input.name}. </p>`); // username or password
-      };
-    };
-
-    // check if username is at least 3 characters long
-    if (input.name === 'username' && input.value.length < 3 && !emptyField) {
-      formIsValid = false;
-      // add red border to input
-      input.classList.add('input-error');
-      console.log(`Your user must be at least 2 characters long. `);
-      errorMessage.insertAdjacentHTML('beforeend', `<p>Your username must be at least 3 characters long. </p>`);
+      errorMessage.insertAdjacentHTML('beforeend', `<p>Please enter your ${input.name}. </p>`); // username or password
     };
 
     // check if password is at least 5 characters long
@@ -57,15 +44,15 @@ function handleSignupSubmit(event) {
       errorMessage.insertAdjacentHTML('beforeend', `<p>Your password must be at least 5 characters long. </p>`);
     };
 
-    // check if username or password contains special characters
-    if ((input.name === 'username' || input.name === 'password') && !isTextFormatCorrect(input.value) && !emptyField) {
+    // check if password contains special characters
+    if (input.name === 'password' && !isTextFormatCorrect(input.value) && !emptyField) {
       formIsValid = false;
       // add red border to input
       input.classList.add('input-error');
       console.log(`Your ${input.name} cannot contain special characters. `);
       errorMessage.insertAdjacentHTML('beforeend', `<p>Your ${input.name} cannot contain any special characters. </p>`);
     };
-
+    
     // check if email contains exactly one @ and at least one .
     if(input.name === 'email' && !isEmailFormatCorrect(input.value) && !emptyField) {
       formIsValid = false;
@@ -86,23 +73,26 @@ function handleSignupSubmit(event) {
     };
   });
 
-  // if(formIsValid) console.log(userData);    // testing echo
-  if (formIsValid) {
-    // Submit data to server
-    fetch('/api/v1/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userData),
-    })
-      .then((response) => response.json())
-      .then((dataObj) => {
-        console.log(dataObj);
-        window.location = '/login';
-      })
-      .catch((err) => console.log(err));
-  };
+  if(formIsValid) console.log(userData);   
+  
+  // TODO - Create this route and implement sessions
+  // if (formIsValid) {
+  //   // Submit data to server
+  //   fetch('/api/v1/login', {
+  //     method: 'POST',
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "credentials": "include"
+  //     },
+  //     body: JSON.stringify(userData),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((dataObj) => {
+  //       console.log(dataObj);
+  //       window.location = '/maingallery';
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 };
 
 function isTextFormatCorrect(input) {
