@@ -1,3 +1,9 @@
+/* * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+} */
+
 body {
   background-color: lightsteelblue;
 }
@@ -12,4 +18,12 @@ body {
   line-height: 16px;
   text-indent: 6px;
   color: #B00F0B;
+}
+
+.alert {
+  margin: 0;
+}
+
+.alert p {
+  margin: 0;
 }
