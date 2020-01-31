@@ -1,3 +1,15 @@
 body {
   background-color: lightsteelblue;
 }
+
+.input-error {
+  background-color: #f8d7da;
+  border: 2px solid #721c24;
+}
+
+.error-message {
+  font-size: 12px;
+  line-height: 16px;
+  text-indent: 6px;
+  color: #B00F0B;
+}
