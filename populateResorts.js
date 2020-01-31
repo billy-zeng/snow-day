@@ -358,3 +358,5 @@ const resortData = [
     reviews: []
   }
 ];
+
+module.exports = resortData;
