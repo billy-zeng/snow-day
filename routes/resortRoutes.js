@@ -15,6 +15,22 @@ router.get("/", (req, res) => {
   });
 });
 
+//————————————————————————————— Show —————————————————————————————//
+
+router.get("/:id", async (req, res) => {
+  try {
+    const foundResort = await DB.Resort.findById(req.params.id);
+    const resObj = {
+      status: 200,
+      data: foundResort,
+      requestedAt: new Date().toLocaleString()
+    };
+    res.status(200).json(resObj);
+  } catch (err) {
+    return res.status(400).json({ message: "something went wrong!", err: err });
+  }
+});
+
 //———————————————————————————— Create ————————————————————————————//
 
 router.post("/", (req, res) => {
@@ -31,6 +47,24 @@ router.post("/", (req, res) => {
     };
     res.status(200).json(resObj);
   });
+});
+
+//————————————————————————————— Update —————————————————————————————//
+
+router.put("/:id/reviews", async (req, res) => {
+  try {
+    const foundResort = await DB.Resort.findById(req.params.id);
+    foundResort.reviews.push(req.body);
+    foundResort.save();
+    const resObj = {
+      status: 200,
+      data: foundResort,
+      requestedAt: new Date().toLocaleString()
+    };
+    res.status(200).json(resObj);
+  } catch (err) {
+    return res.status(500).json({ message: "something went wrong", err: err });
+  }
 });
 
 //—————————————————————————————Export—————————————————————————————//
