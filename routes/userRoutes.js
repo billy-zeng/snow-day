@@ -83,6 +83,43 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+//————————————————————————————— Login —————————————————————————————//
+
+router.post("/login", async (req, res) => {
+  try {
+    // check if username or password is empty
+    if (!req.body.username || !req.body.password) {
+      return res
+        .status(400)
+        .json({ message: "Please enter your username and password" });
+    }
+
+    // lookup username in database, return error msg if not found
+    const foundUser = await DB.User.findOne({ username: req.body.username });
+    if (!foundUser) {
+      return res
+        .status(400)
+        .json({ message: "Username or password is incorrect" });
+    }
+
+    // check if password entered matches foundUser's password
+    let passwordsMatch;
+    passwordsMatch = bcrypt.compare(req.body.password, foundUser.password);
+    if (!passwordsMatch) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    // create new session for logged in user
+    req.session.currentUser = foundUser._id;
+    req.session.createdAt = new Date().toDateString();
+    req.session.user = foundUser;
+    res.json({ foundUser });
+    console.log(req.session);
+  } catch (err) {
+    return res.status(400).json({ error: err });
+  }
+});
+
 //————————————————————————————— Export —————————————————————————————//
 
 module.exports = router;
