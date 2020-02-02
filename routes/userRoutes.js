@@ -69,21 +69,57 @@ router.get("/:id", (req, res) => {
     });
 });
 
-//————————————————————————————— Update —————————————————————————————//
+// //————————————————————————————— Update —————————————————————————————//
 
-router.put("/:id", async (req, res) => {
+// router.put("/:id", async (req, res) => {
+//   try {
+//     const updatedUser = await DB.User.findById(req.params.id);
+//     //console.log(updatedUser.userResorts);
+//     updatedUser.userResorts.push("5e335dfcf2d01e5bb06234be");
+//     updatedUser.save();
+//     res.status(200).json(updatedUser);
+//   } catch (err) {
+//     return res.status(500).json({ message: "something went wrong", err: err });
+//   }
+// });
+
+//————————————————————————————— Update User to Add Resort —————————————————————————————//
+
+router.put("/:id/userResorts/:resort_id", async (req, res) => {
   try {
-    const updatedUser = await DB.User.findById(req.params.id);
+    console.log(req.body);
+    const updatedUser = await DB.User.findById(req.session.currentUser); // find user currently logged in
     //console.log(updatedUser.userResorts);
-    updatedUser.userResorts.push("5e335dfcf2d01e5bb06234be");
-    updatedUser.save();
+    // updatedUser.userResorts.push("5e336bd0e2474c0f58913281");
+    updatedUser.userResorts.push(req.params.resort_id); // add resort to user by its ObjectId
+    updatedUser.save(); // save changes to user
+    console.log(updatedUser);
     res.status(200).json(updatedUser);
   } catch (err) {
+    console.log(err);
     return res.status(500).json({ message: "something went wrong", err: err });
   }
 });
 
-//————————————————————————————— Login —————————————————————————————//
+//————————————————————————————— Update User to Remove Resort —————————————————————————————//
+
+router.delete("/:id/userResorts/:resort_id", async (req, res) => {
+  try {
+    let updatedUser = await DB.User.findById(req.session.currentUser); // find user currently logged in 
+    console.log(updatedUser);
+
+    updatedUser.userResorts.pull({ _id: req.params.resort_id }) //remove a resort from user by its ObjectId
+    updatedUser.save(); // save changes to user
+    console.log(updatedUser);
+
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json({ message: "something went wrong", err: err });
+  };
+});
+
+//————————————————————————————— Login (Create Session) —————————————————————————————//
 
 router.post("/login", async (req, res) => {
   try {
