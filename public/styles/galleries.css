@@ -1,0 +1,12 @@
+:root {
+  /* Colors */
+  --bg: #edf2f4;
+  --card: #d0d7d2;
+  --bar: #a7c294;
+  --border: #446960;
+  --logotext: #50181a;
+}
+
+body {
+  text-align: center;
+}

@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="/styles/style.css">
-  <!-- Main Gallery JS -->
-  <script src="/scripts/maingallery.js" defer></script>
-  <!-- Main JS -->
-  <script src="/scripts/app.js" defer></script>
-  <title>Resort Gallery</title>
-</head>
-<body>
-  <h1>Main Gallery Page</h1>
-  <div id="cardGallery">
-
-  </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/vendor/semantic.css" />
+    <link rel="stylesheet" href="/styles/galleries.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <!-- External JS -->
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"
+    ></script>
+    <script defer src="/vendor/semantic.js"></script>
+    <!-- Internal JS -->
+    <script src="/scripts/maingallery.js" defer></script>
+    <script defer src="/scripts/app.js" defer></script>
+    <title>Snow Day <i class="snowflake icon"></i> Resorts</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>snow<i class="snowflake icon"></i>Day</h1>
+        <ul>
+          <li><a id="maingallery" href="maingallery">My Resorts</a></li>
+          <li><a id="usergallery" href="usergallery">My Resorts</a></li>
+          <li><a id="logout" href="login">Log Out</a></li>
+        </ul>
+      </nav>
+    </header>
+    <h1>California Resorts</h1>
+    <div id="cardGallery"></div>
+  </body>
 </html>

@@ -1,0 +1,19 @@
+body {
+  background-image: url("/images/bg2.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.logoblock {
+  height: 100px;
+  background-color: #a7c294;
+  border-radius: 2px;
+}
+.credentials {
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 15px;
+  height: 800px;
+  width: 400px;
+  background-color: #d0d7d2;
+  box-shadow: 2.5px 2.5px 10px rgba(0, 0, 0, 0.5);
+}

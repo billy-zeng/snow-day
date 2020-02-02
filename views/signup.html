@@ -1,40 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- Signup CSS -->
-  <link rel="stylesheet" href="/styles/signup.css">
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="/styles/style.css">
-  <!-- Signup JS -->
-  <script src="/scripts/signup.js" defer></script>
-  <!-- Main JS -->
-  <script src="/scripts/app.js" defer></script>
-  <title>Sign Up</title>
-</head>
-<body>
-  <h1>Sign Up Page</h1>
-  <form id="signupForm">
-    <div>
-      <label for="username">Username</label>
-      <input type="text" id="name" name="username" placeholder="Username" data-name="username">
-    </div>
-    <div>
-      <label for="email">Email</label>
-      <input type="text" id="email" name="email" placeholder="Email" data-name="email">
-    </div>
-    <div>
-      <label for="password">Password</label>
-      <input type="text" id="password" name="password" placeholder="Password" data-name="password">
-    </div>
-    <select name="proficiency" id="proficiency">
-      <option value="beginner">Beginner</option>
-      <option value="intermediate">Intermediate</option>
-      <option value="advanced">Advanced</option>
-    </select>
-    <button type="submit">Submit</button>
-  </form>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- External JS -->
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"
+    ></script>
+    <script defer src="/vendor/semantic.js"></script>
+    <!-- Internal JS -->
+    <script src="/scripts/signup.js" defer></script>
+    <script src="/scripts/app.js" defer></script>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/vendor/semantic.css" />
+    <!-- Internal CSS -->
+    <link rel="stylesheet" href="/styles/signup.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Sign Up</title>
+  </head>
+  <body>
+    <section class="credentials">
+      <section class="logoblock">bloop</section>
+
+      <h1>Sign Up Page</h1>
+      <form class="ui form" id="signupForm">
+        <div>
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="name"
+            name="username"
+            placeholder="Username"
+            data-name="username"
+          />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            placeholder="Email"
+            data-name="email"
+          />
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input
+            type="text"
+            id="password"
+            name="password"
+            placeholder="Password"
+            data-name="password"
+          />
+        </div>
+        <div>
+          <label for="passwordConfirm">Confirm Password</label>
+          <input
+            type="text"
+            id="passwordConfirm"
+            name="passwordConfirm"
+            placeholder="Confirm Password"
+            data-name="passwordConfirm"
+          />
+        </div>
+        <label for="proficiency">Select your skill level.</label>
+        <select name="proficiency" id="proficiency">
+          <option value="beginner">Beginner</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="advanced">Advanced</option>
+        </select>
+        <button class="ui button" type="submit">Submit</button>
+      </form>
+    </section>
+  </body>
 </html>
