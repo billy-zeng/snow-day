@@ -89,7 +89,7 @@ router.put("/:id/userResorts/:resort_id", async (req, res) => {
   try {
     console.log(req.body);
     const updatedUser = await DB.User.findById(req.session.currentUser); // find user currently logged in
-    //console.log(updatedUser.userResorts);
+    // console.log(updatedUser.userResorts);
     // updatedUser.userResorts.push("5e336bd0e2474c0f58913281");
     updatedUser.userResorts.push(req.params.resort_id); // add resort to user by its ObjectId
     updatedUser.save(); // save changes to user
@@ -154,6 +154,22 @@ router.post("/login", async (req, res) => {
   } catch (err) {
     return res.status(400).json({ error: err });
   }
+});
+
+//————————————————————————————— Logout (Delete Session) —————————————————————————————//
+
+// DELETE destroy session
+router.delete('/logout', (req, res) => {
+  if (!req.session.currentUser) {
+    return res.status(401).json({ message: 'Unauthorized, please login and try again' })
+  }
+
+  req.session.destroy((err) => {
+    if (err) return res.status(400).json(err);
+
+    res.status(200).json({ message: 'Successfully logged out' });
+    // res.redirect('/login');
+  });  
 });
 
 //————————————————————————————— Export —————————————————————————————//
