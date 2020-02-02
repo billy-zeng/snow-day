@@ -23,39 +23,40 @@
     <title>SnowDay | Login</title>
   </head>
   <body>
-    <header>
-      <nav>
-        <div id="tester"><p>bloop</p></div>
-      </nav>
-    </header>
-
     <section class="credentials" id="login-splash">
-      <section class="logoblock">bloop</section>
-      <h1>welcome back - please sign in.</h1>
-      <form class="ui form" id="loginForm">
-        <div class="fields">
-          <div class="field">
-            <label for="username"> Username</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              placeholder="Username"
-              data-name="username"
-            />
-          </div>
-          <div class="field">
-            <label for="password">Password</label>
-            <input
-              type="text"
-              id="password"
-              name="password"
-              placeholder="Password"
-              data-name="password"
-            />
-          </div>
+      <section class="logoblock">
+        <h1>SnowDay<i class="snowflake outline icon"></i></h1>
+      </section>
+      <h3>Welcome back - please log in:</h3>
+      <div class="ui divider"></div>
+      <form class="ui large form" id="loginForm">
+        <!-- <div class="fields"> -->
+        <div class="field">
+          <label for="username"> Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Username"
+            data-name="username"
+          />
+          <!-- </div> -->
+          <!-- <div class="field"> -->
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            data-name="password"
+          />
+          <!-- </div> -->
         </div>
-        <button class="ui button" id="loginButton" type="submit">Submit</button>
+        <div class="ui divider"></div>
+
+        <button class="ui fluid button" id="loginButton" type="submit">
+          Log In
+        </button>
       </form>
     </section>
     <footer>

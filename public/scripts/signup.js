@@ -147,3 +147,13 @@ function isEmailFormatCorrect(email) {
   });
   return atCount === 1 && periodCount > 0;
 }
+
+/* Semantic UI */
+$(".ui.dropdown").dropdown();
+
+const bgRandom = () => {
+  const imgNum = Math.floor(Math.random() * 5) + 1;
+  $("body").css("background-image", `/images/bg${imgNum}.jpeg`);
+  console.log(`/images/bg${imgNum}.jpeg`);
+};
+bgRandom();

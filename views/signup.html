@@ -15,18 +15,23 @@
     <script src="/scripts/app.js" defer></script>
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/semantic.css" />
+
     <!-- Internal CSS -->
     <link rel="stylesheet" href="/styles/signup.css" />
     <link rel="stylesheet" href="/styles/main.css" />
-    <title>Sign Up</title>
+    <link rel="icon" type="image/png" href="/images/favicon-white.png" />
+    <title>SnowDay | Register</title>
   </head>
   <body>
     <section class="credentials">
-      <section class="logoblock">bloop</section>
+      <section class="logoblock">
+        <h1>SnowDay<i class="snowflake outline icon"></i></h1>
+      </section>
 
-      <h1>Sign Up Page</h1>
-      <form class="ui form" id="signupForm">
-        <div>
+      <h3>Register your account:</h3>
+      <div class="ui divider"></div>
+      <form class="ui large form" id="signupForm">
+        <div class="field">
           <label for="username">Username</label>
           <input
             type="text"
@@ -35,44 +40,54 @@
             placeholder="Username"
             data-name="username"
           />
-        </div>
-        <div>
-          <label for="email">Email</label>
+        </div class="field">
+        <div class="field">
+          <label for="email">E-mail</label>
           <input
             type="text"
             id="email"
             name="email"
-            placeholder="Email"
+            placeholder="E-mail"
             data-name="email"
           />
         </div>
-        <div>
+        <div class="field">
           <label for="password">Password</label>
           <input
-            type="text"
+            type="password"
             id="password"
             name="password"
             placeholder="Password"
             data-name="password"
           />
         </div>
-        <div>
+        <div class="field">
           <label for="passwordConfirm">Confirm Password</label>
           <input
-            type="text"
+            type="password"
             id="passwordConfirm"
             name="passwordConfirm"
             placeholder="Confirm Password"
             data-name="passwordConfirm"
           />
         </div>
-        <label for="proficiency">Select your skill level.</label>
-        <select name="proficiency" id="proficiency">
-          <option value="beginner">Beginner</option>
-          <option value="intermediate">Intermediate</option>
-          <option value="advanced">Advanced</option>
-        </select>
-        <button class="ui button" type="submit">Submit</button>
+        <div class="field">
+          <label for="proficiency">Skill Level</label>
+          <select
+            class="ui selection fluid dropdown"
+            name="proficiency"
+            id="proficiency"
+          >
+            <option value="">Select Skill Level</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+        </div>
+
+        <div class="ui divider"></div>
+
+        <button class="ui button fluid" type="submit">Register</button>
       </form>
     </section>
   </body>

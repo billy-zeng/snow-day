@@ -1,10 +1,10 @@
 :root {
   /* Colors */
-  --bg: #edf2f4;
-  --card: #d0d7d2;
-  --bar: #a7c294;
-  --border: #446960;
-  --logotext: #50181a;
+  --bg: #eef2f1;
+  --card: #c9dce3;
+  --bar: #2d495f;
+  --border: #1f313f;
+  --logotext: #0e1b24;
 }
 
 body {
