@@ -7,12 +7,11 @@
   --logotext: #0e1b24;
 }
 body {
-  background-image: url("/images/bg1.jpeg");
+  background-image: url("/images/bg4.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
 }
 header {
-  /* background-color: var(--bar); */
   padding: 10px;
   height: 60px;
 }
