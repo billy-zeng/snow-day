@@ -31,18 +31,29 @@ fetch(`/api/v1/users/${currentUserId}`, {
   .catch((err) => console.log(err));
 
 function render(resortsArr) {
-  const cards = resortsArr.map((resort) => {
-    return getTemplate(resort);
-  }).join('');
-
-  cardGallery.insertAdjacentHTML('beforeend', cards);
+  resortsArr.map((resort) => {
+    getTemplate(resort);
+  });
 };
 
 function getTemplate(resortObj) {
-  return `
-    <p>${resortObj.name}</p>
-    <p>${resortObj.address}</p>
-    <p>${resortObj.phoneNumber}</p>
-    <p>${resortObj.reviews[0].comment}</p>
-  `
-}
+  fetch(`/api/v1/resorts/${resortObj.lat}/${resortObj.lng}`, {
+     method: 'GET',
+     headers: {
+       "Content-Type": "application/json",
+     }
+   })
+     .then((snowdepthDataStream) => snowdepthDataStream.json())
+     .then((snowdepthDataObj) => {
+       console.log(snowdepthDataObj);
+       console.log(resortObj);
+       const cardTemplate = `
+       <p>${resortObj.name}</p>
+       <p>${resortObj.address}</p>
+       <p>${resortObj.phoneNumber}</p>
+       <p>Estimated snow depth: ${snowdepthDataObj.response.periods[0].snowDepthIN}</p>
+     `
+       cardGallery.insertAdjacentHTML('beforeend', cardTemplate);
+     })
+     .catch((err) => console.log(err));
+ };
