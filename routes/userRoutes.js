@@ -150,10 +150,13 @@ router.post("/login", async (req, res) => {
     req.session.createdAt = new Date().toDateString();
     req.session.user = foundUser;
     res.json({ foundUser });
+    // req.session.save(() => {
+    //   res.json(req.session);
+    // })
     // req.session.save();
     // res.json(req.session);
-    // res.send(req.session);
     console.log(req.session);
+    console.log(req.sessionID);
   } catch (err) {
     return res.status(400).json({ error: err });
   }

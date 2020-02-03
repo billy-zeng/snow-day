@@ -39,5 +39,6 @@ function getTemplate(resortObj) {
     <p>${resortObj.name}</p>
     <p>${resortObj.address}</p>
     <p>${resortObj.phoneNumber}</p>
+    <p>${resortObj.reviews[0].comment}</p>
   `
 }

@@ -51,7 +51,7 @@ router.post("/", (req, res) => {
 
 //————————————————————————————— Update —————————————————————————————//
 
-router.put("/:id/reviews", async (req, res) => {
+router.post("/:id/reviews", async (req, res) => {
   try {
     const foundResort = await DB.Resort.findById(req.params.id);
     foundResort.reviews.push(req.body);
