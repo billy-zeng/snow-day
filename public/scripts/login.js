@@ -90,7 +90,7 @@ function handleLoginSubmit(event) {
       .then((response) => response.json())
       .then((dataObj) => {
         console.log(dataObj);
-        window.location = '/maingallery';
+        // window.location = '/maingallery';
       })
       .catch((err) => {
         console.log(err);

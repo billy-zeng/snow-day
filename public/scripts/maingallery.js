@@ -13,6 +13,19 @@ fetch('/api/v1/resorts', {
   })
   .catch((err) => console.log(err));
 
+// fetch('https://api.aerisapi.com/winter/snowdepth/45.37,-121.7?client_id=Zc6ukuD2NZWLcVQhjTnKx&client_secret=WtzA8Yipil9TNFiwtuvck2TTu1NeLUTZwAs8GsCG/v1/resorts', {
+//   method: 'GET',
+//   headers: {
+//     "Access-Control-Allow-Origin": "*",
+//   }
+// })
+//   .then((weatherDataStream) => console.log(weatherDataStream))
+//   // .then((weatherDataObj) => {
+//   //   console.log(weatherDataObj);
+//   //   // render(dataObj.foundResorts);
+//   // })
+//   .catch((err) => console.log(err));
+
 function render(resortsArr) {
   const cards = resortsArr.map((resort) => {
     return getTemplate(resort);
