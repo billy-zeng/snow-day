@@ -94,6 +94,7 @@ router.put("/:id/userResorts/:resort_id", async (req, res) => {
     updatedUser.userResorts.push(req.params.resort_id); // add resort to user by its ObjectId
     updatedUser.save(); // save changes to user
     console.log(updatedUser);
+    req.session.user = updatedUser; // update current session user -> optional but could be helpful so we don't do another DB query
     res.status(200).json(updatedUser);
   } catch (err) {
     console.log(err);
@@ -111,7 +112,7 @@ router.delete("/:id/userResorts/:resort_id", async (req, res) => {
     updatedUser.userResorts.pull({ _id: req.params.resort_id }) //remove a resort from user by its ObjectId
     updatedUser.save(); // save changes to user
     console.log(updatedUser);
-
+    req.session.user = updatedUser; // update current session user -> optional but could be helpful so we don't do another DB query
     res.status(200).json(updatedUser);
   } catch (err) {
     console.log(err)
