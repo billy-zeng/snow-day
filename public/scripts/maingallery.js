@@ -1,5 +1,21 @@
 console.log('maingallery JS connected...');
 
+// const logoutButton = document.getElementById('logoutButton');
+
+// logoutButton.addEventListener('click', (event) => {
+//   event.preventDefault();
+//   fetch('/api/v1/users/logout', {
+//     method: 'DELETE'
+//   })
+//     .then((dataStream) => dataStream.json())
+//     .then((data) => {
+//       if(data.status === 200){
+//         window.location = '/homepage';
+//       } else console.log(data);
+//     })
+//     .catch((err) => console.log(err));
+// });
+
 const cardGallery = document.getElementById('cardGallery');
 
 
