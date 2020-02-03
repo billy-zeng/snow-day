@@ -1,0 +1,32 @@
+:root {
+  /* Colors */
+  --bg: #eef2f1;
+  --card: #c9dce3;
+  --bar: #2d495f;
+  --border: #1f313f;
+  --logotext: #0e1b24;
+}
+body {
+  background-image: url("/images/bg4.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+header {
+  padding: 10px;
+  height: 60px;
+}
+
+.logoblock h1 {
+  font-family: "Pacifico", cursive;
+  font-size: 40px;
+  color: white;
+}
+.logoblock {
+  padding: 15px 5px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  height: 100px;
+  background-color: var(--bar);
+  border-radius: 5px;
+}

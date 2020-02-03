@@ -121,3 +121,6 @@ function isEmailFormatCorrect(email){
   })
   return (atCount === 1 && periodCount > 0);
 };
+
+/* Semantic UI */
+$(".ui.dropdown").dropdown();

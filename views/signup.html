@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- External JS -->
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"
+    ></script>
+    <script defer src="/vendor/semantic.js"></script>
+    <!-- Internal JS -->
+    <script src="/scripts/signup.js" defer></script>
+    <script src="/scripts/app.js" defer></script>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/vendor/semantic.css" />
+    <!-- Internal CSS -->
+    <link rel="stylesheet" href="/styles/signup.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="icon" type="image/png" href="/images/favicon-white.png" />
+    <title>SnowDay | Register</title>
+  </head>
+  <body>
+    <section class="credentials">
+      <section class="logoblock">
+        <h1>SnowDay<i class="snowflake outline icon"></i></h1>
+      </section>
+
+      <h3>Register your account:</h3>
+      <div class="ui divider"></div>
+
+      <form class="ui large form" id="signupForm">
+        <div class="field">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="name"
+            name="username"
+            placeholder="Username"
+            data-name="username"
+        >
+        </div>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              placeholder="E-mail"
+              data-name="email"
+            />
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              data-name="password"
+            />
+          </div>
+          <div class="field">
+            <label for="passwordConfirm">Confirm Password</label>
+            <input
+              type="password"
+              id="passwordConfirm"
+              name="passwordConfirm"
+              placeholder="Confirm Password"
+              data-name="passwordConfirm"
+            />
+          </div>
+          <div class="field">
+            <label for="proficiency">Skill Level</label>
+            <select
+              class="ui selection fluid dropdown"
+              name="proficiency"
+              id="proficiency"
+            >
+              <option value="">Select Skill Level</option>
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
+
+          <div class="ui divider"></div>
+
+          <button class="ui button fluid" type="submit">Register</button>
+        </div>
+      </form>
+    </section>
+  </body>
+</html>

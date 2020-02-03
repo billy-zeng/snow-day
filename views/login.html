@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- External JS -->
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"
+    ></script>
+    <script defer src="/vendor/semantic.js"></script>
+    <!-- Internal JS -->
+    <script defer src="/scripts/login.js"></script>
+    <script defer src="/scripts/app.js"></script>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/vendor/semantic.css" />
+
+    <!-- Internal CSS -->
+    <link rel="stylesheet" href="/styles/signup.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="icon" type="image/png" href="/images/favicon-white.png" />
+    <title>SnowDay | Login</title>
+  </head>
+  <body>
+    <section class="credentials" id="login-splash">
+      <section class="logoblock">
+        <h1>SnowDay<i class="snowflake outline icon"></i></h1>
+      </section>
+
+      <h3>Welcome back - please log in:</h3>
+      <div class="ui divider"></div>
+
+      <form class="ui large form" id="loginForm">
+        <div class="field">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Username"
+            data-name="username"
+          />
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            data-name="password"
+          />
+        </div>
+        <div class="ui divider"></div>
+
+        <button class="ui fluid button" id="loginButton" type="submit">
+          Log In
+        </button>
+      </form>
+    </section>
+    <footer>
+      <p></p>
+    </footer>
+  </body>
+</html>

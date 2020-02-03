@@ -1,0 +1,53 @@
+:root {
+  /* Colors */
+  --bg: #eef2f1;
+  --card: #c9dce3;
+  --bar: #2d495f;
+  --border: #1f313f;
+  --logotext: #0e1b24;
+}
+body {
+  background-image: url("/images/bg5.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+header .header {
+  font-family: "Pacifico", cursive;
+  font-size: 28px;
+  color: white;
+  margin-bottom: 0;
+}
+header nav {
+  margin: 0 15px 0 0;
+}
+.ui.menu.top-nav {
+  border-radius: 0px;
+  background: var(--bar);
+}
+.ui.menu.top-nav .item {
+  color: white;
+}
+
+.resortpane {
+  /* width: 800px; */
+  padding: 10px;
+  /* margin: 100px 10px 0; */
+  border-radius: 5px;
+  box-shadow: 2.5px 2.5px 10px rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+/* .resort-info {
+  background-color: var(--card);
+} */
+.test-zone {
+  padding: 10px;
+}
+.ui .card {
+  box-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
+}
+@media only screen and (max-width: 500px) {
+  .ui.menu.top-nav .item {
+    padding: 0;
+    margin: 6px;
+  }
+}
