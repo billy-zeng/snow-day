@@ -31,6 +31,7 @@ fetch('/api/v1/resorts', {
 function render(resortsArr) {
   resortsArr.map((resort) => {
     getTemplate(resort);
+    // getAverageTemp(resort);
   });
 };
 
@@ -57,7 +58,7 @@ function render(resortsArr) {
 // };
 
 function getTemplate(resortObj) {
-  fetch(`/api/v1/resorts/${resortObj.lat}/${resortObj.lng}`, {
+  fetch(`/api/v1/weather/snowdepth/${resortObj.lat}/${resortObj.lng}`, {
      method: 'GET',
      headers: {
        "Content-Type": "application/json",
@@ -84,7 +85,7 @@ function getTemplate(resortObj) {
             <div class="ui card fluid">
               <div class="content">
                 <a class="header">
-                  <p id="weather">*<span id="temperature_${resortObj._id}>Forecast: </span>* | *Snow Pack: ${snowdepthDataObj.response.periods[0].snowDepthIN}in *</p>
+                  <p id="weather">*<span id="temperature_${resortObj._id}">Forecast: </span>* | *Snow Pack: *</p>
                 </a>
                 <div class="ui divider"></div>
                 <p id="elevation">Base ${resortObj.elevation_base} | Summit ${resortObj.elevation_summit}</p>
@@ -112,20 +113,19 @@ function getTemplate(resortObj) {
         </div>
      `
       cardGallery.insertAdjacentHTML('beforeend', cardTemplate);
-      
 
       // logic to determine if we should append sun icon
       // if (snowdepthDataObj.response.periods[0].snowDepthIN > 20){
       //   document.getElementById(resortObj._id).insertAdjacentHTML('beforeend', '<i class="right floated sun outline icon"></i>');
       // }
-
+      // getAverageTemp(resortObj);
       $('.ui.accordion').accordion('refresh');
      })
      .catch((err) => console.log(err));
  };
 
 // function getAverageTemp(resortObj) {
-//    fetch(`/api/v1/resorts/temperature/${resortObj.lat}/${resortObj.lng}`, {
+//    fetch(`/api/v1/weather/temperature/${resortObj.lat}/${resortObj.lng}`, {
 //     method: 'GET',
 //     headers: {
 //       "Content-Type": "application/json",
@@ -134,6 +134,12 @@ function getTemplate(resortObj) {
 //     .then((temperatureDataStream) => temperatureDataStream.json())
 //     .then((temperatureDataObj) => {
 //       console.log(temperatureDataObj);
+//       let tempSum;
+//       temperatureDataObj.response.periods.forEach((day) => {
+//         tempSum += day.avgTempF;
+//       });
+//       const avgTemperature = tempSum/7;
+//       document.getElementById(`temperature_${resortObj_id}`).insertAdjacentHTML('beforeend', avgTemperature);
 //     })
 //     .catch((err) => console.log(err));
 // }

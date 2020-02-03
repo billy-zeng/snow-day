@@ -30,6 +30,7 @@ app.use(
 
 app.use("/api/v1/users", routes.user);
 app.use("/api/v1/resorts", routes.resort);
+app.use("/api/v1/weather", routes.weather);
 
 //————————————————————————— HTML Routes ——————————————————————————//
 
