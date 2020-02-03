@@ -79,7 +79,7 @@ function handleLoginSubmit(event) {
   // TODO - Create this route and implement sessions
   if (formIsValid) {
     // Submit data to server
-    fetch('/api/v1/login', {
+    fetch('/api/v1/users/login', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -90,7 +90,7 @@ function handleLoginSubmit(event) {
       .then((response) => response.json())
       .then((dataObj) => {
         console.log(dataObj);
-        window.location = '/maingallery';
+        // window.location = '/maingallery';
       })
       .catch((err) => {
         console.log(err);
