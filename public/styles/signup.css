@@ -11,38 +11,3 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
-label {
-  margin: 10px 0px;
-}
-
-.logoblock {
-  padding: 15px 5px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  height: 100px;
-  background-color: var(--bar);
-  border-radius: 5px;
-}
-.logoblock h1 {
-  font-family: "Pacifico", cursive;
-  font-size: 50px;
-  color: white;
-  /* text-align: center; */
-}
-/* .divider {
-  width: 350px;
-  height: 5px;
-  margin: 0px auto 5px;
-  border-bottom: 1px solid var(--logotext);
-} */
-.credentials {
-  box-sizing: border-box;
-  margin: 30px auto;
-  padding: 15px;
-  /* height: 800px; */
-  width: 400px;
-  border-radius: 5px;
-  background-color: var(--bg);
-  box-shadow: 2.5px 2.5px 10px rgba(0, 0, 0, 0.5);
-}

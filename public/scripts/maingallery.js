@@ -1,30 +1,42 @@
-console.log('maingallery JS connected...');
+console.log("maingallery JS connected...");
 
-const cardGallery = document.getElementById('cardGallery');
+const cardGallery = document.getElementById("cardGallery");
 
-
-fetch('/api/v1/resorts', {
-  method: 'GET'
+fetch("/api/v1/resorts", {
+  method: "GET"
 })
-  .then((dataStream) => dataStream.json())
-  .then((dataObj) => {
+  .then(dataStream => dataStream.json())
+  .then(dataObj => {
     console.log(dataObj);
     render(dataObj.foundResorts);
   })
-  .catch((err) => console.log(err));
+  .catch(err => console.log(err));
 
 function render(resortsArr) {
-  const cards = resortsArr.map((resort) => {
-    return getTemplate(resort);
-  }).join('');
+  const cards = resortsArr
+    .map(resort => {
+      return getTemplate(resort);
+    })
+    .join("");
 
-  cardGallery.insertAdjacentHTML('beforeend', cards);
-};
+  cardGallery.insertAdjacentHTML("beforeend", cards);
+  $(".ui.accordion").accordion("refresh");
+}
 
 function getTemplate(resortObj) {
   return `
-    <p>${resortObj.name}</p>
-    <p>${resortObj.address}</p>
-    <p>${resortObj.phoneNumber}</p>
-  `
+    <div class="ui styled accordion">
+      <div class="title floated left">
+        <i class="dropdown icon"></i>
+        ${resortObj.name}
+      </div>
+      <div class="content">
+        <p>${resortObj.address}</p>
+        <p>${resortObj.phoneNumber}</p>
+      </div>
+    </div>
+    `;
 }
+
+/* Semantic UI  */
+$(".ui.accordion").accordion();
