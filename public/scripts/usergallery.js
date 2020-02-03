@@ -57,3 +57,6 @@ function getTemplate(resortObj) {
      })
      .catch((err) => console.log(err));
  };
+
+ /* Semantic UI  */
+$(".ui.accordion").accordion();
