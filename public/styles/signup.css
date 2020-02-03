@@ -1,0 +1,13 @@
+:root {
+  /* Colors https://bit.ly/2S91JEl */
+  --bg: #eef2f1;
+  --card: #c9dce3;
+  --bar: #2d495f;
+  --border: #1f313f;
+  --logotext: #0e1b24;
+}
+body {
+  background-image: url("/images/bg2.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}

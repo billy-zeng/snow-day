@@ -1,21 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="/styles/style.css">
-  <!-- Main Gallery JS -->
-  <script src="/scripts/maingallery.js" defer></script>
-  <!-- Main JS -->
-  <script src="/scripts/app.js" defer></script>
-  <title>Resort Gallery</title>
-</head>
-<body>
-  <h1>Main Gallery Page</h1>
-  <div id="cardGallery">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- External JS -->
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"
+    ></script>
+    <script defer src="/vendor/semantic.js"></script>
+    <!-- Internal JS -->
+    <script defer src="/scripts/maingallery.js"></script>
+    <script defer src="/scripts/app.js"></script>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/vendor/semantic.css" />
+    <!-- Internal CSS -->
+    <link rel="stylesheet" href="/styles/galleries.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="icon" type="image/png" href="/images/favicon-white.png" />
+    <title>SnowDay | Resorts</title>
+  </head>
 
-  </div>
-</body>
+  <body>
+    <header class="ui menu stackable top-nav">
+      <div class="header item">SnowDay<i class="snowflake icon"></i></div>
+      <nav class="item right">
+        <div class="ui fluid buttons">
+          <a href="maingallery" class="ui button">All Resorts</a>
+          <a href="usergallery" class="ui button">My Resorts</a>
+          <a href="login" class="ui button" id="logout">Log out</a>
+        </div>
+      </nav>
+    </header>
+    <!-- <section class="resortpane">
+      <h1>California Resorts</h1>
+      <div id="cardGallery"></div>
+    </section> -->
+    <section id="cardGallery" class="test-zone">
+      <div class="ui accordion gallery-card">
+        <div class="title">
+          <div class="ui fluid card">
+            <div class="ui content">
+              <a class="collapsed header">
+                <i class="snowflake icon"> </i>Kirkwood
+                <i class="right floated sun outline icon"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="resort-info">
+            <div class="ui card fluid">
+              <div class="content">
+                <a class="header">
+                  <p id="weather">*Forecast* | *Snow Pack*</p>
+                </a>
+                <div class="ui divider"></div>
+                <p id="elevation">Base 7800 | Summit 9800</p>
+                <div class="ui divider"></div>
+                <p id="lifts">12 Lifts | 85 Runs</p>
+              </div>
+              <div class="content">
+                <div class="ui stackable three item menu">
+                  <a class="item" href="https://www.kirkwood.com/"
+                    ><i class="linkify icon"></i>Website</a
+                  >
+                  <a
+                    class="item"
+                    href="https://www.kirkwood.com/plan-your-trip/lift-access/tickets.aspx"
+                    ><i class="linkify icon"></i>Tickets</a
+                  >
+                  <a class="item" href="tel:1 (209) 258-6000"
+                    ><i class="phone square icon"></i>1 (209) 258-6000</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
 </html>
