@@ -1,6 +1,6 @@
 console.log('usergallery JS connected...');
 
-// const logoutButton = document.getElementById('logoutButton');
+// const logoutButton = document.getElementById('logout');
 
 // logoutButton.addEventListener('click', (event) => {
 //   event.preventDefault();
