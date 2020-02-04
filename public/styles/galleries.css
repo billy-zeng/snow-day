@@ -8,6 +8,7 @@
 }
 body {
   background-image: url("/images/bg5.jpeg");
+  background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -45,9 +46,21 @@ header nav {
 .ui .card {
   box-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
 }
+.ui.centered.header {
+  margin: 0px;
+}
+.ui.mini.statistic {
+  margin-bottom: 0px;
+}
+.ui.tiny.horizontal.statistic {
+  margin: 0px;
+}
 @media only screen and (max-width: 500px) {
   .ui.menu.top-nav .item {
     padding: 0;
     margin: 6px;
+  }
+  .ui.tiny.horizontal.statistic {
+    margin: 0 auto;
   }
 }
