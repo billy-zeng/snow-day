@@ -56,6 +56,9 @@ header nav {
   margin: 0px;
 }
 @media only screen and (max-width: 500px) {
+  header {
+    padding: 0 10px;
+  }
   .ui.menu.top-nav .item {
     padding: 0;
     margin: 6px;

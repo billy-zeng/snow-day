@@ -1,4 +1,4 @@
-console.log('maingallery JS connected...');
+console.log("maingallery JS connected...");
 
 // const logoutButton = document.getElementById('logout');
 
@@ -16,33 +16,33 @@ console.log('maingallery JS connected...');
 //     .catch((err) => console.log(err));
 // });
 
-const cardGallery = document.getElementById('cardGallery');
+const cardGallery = document.getElementById("cardGallery");
 
-fetch('/api/v1/resorts', {
-  method: 'GET'
+fetch("/api/v1/resorts", {
+  method: "GET"
 })
-  .then((dataStream) => dataStream.json())
-  .then((dataObj) => {
+  .then(dataStream => dataStream.json())
+  .then(dataObj => {
     console.log(dataObj);
     render(dataObj.foundResorts);
   })
-  .catch((err) => console.log(err));
+  .catch(err => console.log(err));
 
 function render(resortsArr) {
-  resortsArr.map((resort) => {
+  resortsArr.map(resort => {
     getTemplate(resort);
   });
-};
+}
 
 function getTemplate(resortObj) {
   fetch(`/api/v1/weather/snowdepth/${resortObj.lat}/${resortObj.lng}`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     }
   })
-    .then((snowdepthDataStream) => snowdepthDataStream.json())
-    .then((snowdepthDataObj) => {
+    .then(snowdepthDataStream => snowdepthDataStream.json())
+    .then(snowdepthDataObj => {
       console.log(snowdepthDataObj);
       console.log(resortObj);
 
@@ -135,42 +135,55 @@ function getTemplate(resortObj) {
             </div>
           </div>
         </div>
-      `
+      `;
 
-      cardGallery.insertAdjacentHTML('beforeend', cardTemplate);
+      cardGallery.insertAdjacentHTML("beforeend", cardTemplate);
 
       getAverageTemp(resortObj);
 
-      $('.ui.accordion').accordion('refresh');
+      $(".ui.accordion").accordion("refresh");
     })
-    .catch((err) => console.log(err));
- };
+    .catch(err => console.log(err));
+}
 
 function getAverageTemp(resortObj) {
   fetch(`/api/v1/weather/temperature/${resortObj.lat}/${resortObj.lng}`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     }
   })
-    .then((temperatureDataStream) => temperatureDataStream.json())
-    .then((temperatureDataObj) => {
+    .then(temperatureDataStream => temperatureDataStream.json())
+    .then(temperatureDataObj => {
       console.log(temperatureDataObj);
       let tempSum = 0;
-      temperatureDataObj.response[0].periods.forEach((day) => {
+      temperatureDataObj.response[0].periods.forEach(day => {
         tempSum += day.avgTempF;
       });
-      const avgTemperature = Math.round(tempSum/7);
-      document.getElementById(`temperature_${resortObj._id}`).insertAdjacentHTML('beforeend', avgTemperature);
-      
+      const avgTemperature = Math.round(tempSum / 7);
+      document
+        .getElementById(`temperature_${resortObj._id}`)
+        .insertAdjacentHTML("beforeend", avgTemperature);
+
       // logic to determine if we should append sun icon
       const snowdepth = document.getElementById(`snowdepth_${resortObj._id}`);
       if (parseInt(snowdepth.innerText) > 20 && avgTemperature < 30) {
-        document.getElementById(resortObj._id).insertAdjacentHTML('beforeend', '<i class="right floated sun outline icon"></i>');
+        document
+          .getElementById(resortObj._id)
+          .insertAdjacentHTML(
+            "beforeend",
+            '<i class="right floated sun outline icon"></i>'
+          );
       }
     })
-    .catch((err) => console.log(err));
+    .catch(err => console.log(err));
 }
 
 /* Semantic UI  */
 $(".ui.accordion").accordion();
+$(".checkbox").checkbox("attach events", ".toggle.button");
+$(".checkbox").checkbox("attach events", ".check.button", "check");
+$(".checkbox").checkbox("attach events", ".uncheck.button", "uncheck");
+$(".checkbox").on("click", event => {
+  console.log(event.target.previousElementSibling.checked);
+});
