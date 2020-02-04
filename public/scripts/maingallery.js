@@ -35,16 +35,16 @@ function render(resortsArr) {
 }
 
 function getTemplate(resortObj) {
-  fetch(`/api/v1/weather/snowdepth/${resortObj.lat}/${resortObj.lng}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-    .then(snowdepthDataStream => snowdepthDataStream.json())
-    .then(snowdepthDataObj => {
-      console.log(snowdepthDataObj);
-      console.log(resortObj);
+  // fetch(`/api/v1/weather/snowdepth/${resortObj.lat}/${resortObj.lng}`, {
+  //   method: "GET",
+  //   headers: {
+  //     "Content-Type": "application/json"
+  //   }
+  // })
+  //   .then(snowdepthDataStream => snowdepthDataStream.json())
+  //   .then(snowdepthDataObj => {
+  //     console.log(snowdepthDataObj);
+  //     console.log(resortObj);
 
       const cardTemplate = `
         <div class="ui accordion gallery-card">
@@ -73,7 +73,7 @@ function getTemplate(resortObj) {
                     <div class="ui divider"></div>
                     <div class="ui tiny horizontal statistic">
                       <div class="value">
-                        <span id="snowdepth_${resortObj._id}">${snowdepthDataObj.response.periods[0].snowDepthIN}"</span>
+                        <span id="snowdepth_${resortObj._id}">"</span>
                       </div>
                       <div class="label">
                         Snow Depth
@@ -117,7 +117,7 @@ function getTemplate(resortObj) {
                   </a>
                 </div>
                 <div class="content">
-                  <div class="ui stackable three item menu">
+                  <div class="ui stackable four item menu">
                     <a class="item" href="${resortObj.mainWebsite}"
                       ><i class="linkify icon"></i>Website</a
                     >
@@ -129,6 +129,10 @@ function getTemplate(resortObj) {
                     <a class="item" href="${resortObj.phoneNumber}"
                       ><i class="phone square icon"></i>${resortObj.phoneNumber}</a
                     >
+                    <div class="ui item toggle checkbox">
+                      <input type="checkbox" name="favorite" data-resortid="${resortObj._id}" />
+                      <label>Favorite</label>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -139,11 +143,12 @@ function getTemplate(resortObj) {
 
       cardGallery.insertAdjacentHTML("beforeend", cardTemplate);
 
-      getAverageTemp(resortObj);
+      // getAverageTemp(resortObj);
 
       $(".ui.accordion").accordion("refresh");
-    })
-    .catch(err => console.log(err));
+      $(".checkbox").checkbox("refresh");
+//     })
+//     .catch(err => console.log(err));
 }
 
 function getAverageTemp(resortObj) {
@@ -179,11 +184,49 @@ function getAverageTemp(resortObj) {
     .catch(err => console.log(err));
 }
 
+function addResort(resortId){
+  fetch(`/api/v1/users/userResorts/${resortId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "credentials": "include"
+    }  
+  })
+    .then((updatedUser) => updatedUser.json())
+    .then((updatedUserObj) => console.log(updatedUserObj))
+    .catch(err => console.log(err));
+};
+
+function removeResort(resortId){
+  fetch(`/api/v1/users/userResorts/${resortId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "credentials": "include"
+    }  
+  })
+    .then((updatedUser) => updatedUser.json())
+    .then((updatedUserObj) => console.log(updatedUserObj))
+    .catch(err => console.log(err));
+};
+
+
 /* Semantic UI  */
 $(".ui.accordion").accordion();
 $(".checkbox").checkbox("attach events", ".toggle.button");
 $(".checkbox").checkbox("attach events", ".check.button", "check");
 $(".checkbox").checkbox("attach events", ".uncheck.button", "uncheck");
-$(".checkbox").on("click", event => {
+$("body").on("click", ".checkbox > label", event => {
+  console.log(event.target);
   console.log(event.target.previousElementSibling.checked);
+  // console.log(event.target.previousElementSibling);
+  let targetResortId = event.target.previousElementSibling.dataset.resortid;
+  console.log(targetResortId);
+  if(event.target.previousElementSibling.checked){
+    addResort(targetResortId);
+  } else {
+    removeResort(targetResortId);
+  };
 });
+
+// ${snowdepthDataObj.response.periods[0].snowDepthIN}" --- SNOW DEPTH value; removed for testing
