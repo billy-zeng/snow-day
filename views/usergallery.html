@@ -11,7 +11,7 @@
     ></script>
     <script defer src="/vendor/semantic.js"></script>
     <!-- Internal JS -->
-    <script defer src="/scripts/maingallery.js"></script>
+    <script defer src="/scripts/usergallery.js"></script>
     <script defer src="/scripts/app.js"></script>
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/semantic.css" />
@@ -38,11 +38,11 @@
       <div id="cardGallery"></div>
     </section> -->
     <section id="cardGallery" class="test-zone">
-      <!-- <div class="ui accordion gallery-card">
+      <div class="ui accordion gallery-card">
         <div class="title">
           <div class="ui fluid card">
             <div class="ui content">
-              <a class="titleBar header">
+              <a class="collapsed header">
                 <i class="snowflake icon"> </i>Kirkwood
                 <i class="right floated sun outline icon"></i>
               </a>
@@ -53,60 +53,13 @@
           <div class="resort-info">
             <div class="ui card fluid">
               <div class="content">
-                <a class="ui centered header">
-                  <div class="ui tiny horizontal statistic">
-                    <div class="value">
-                      57˚
-                    </div>
-                    <div class="label">
-                      Daytime Avg
-                    </div>
-                  </div>
-                  <div class="ui divider"></div>
-                  <div class="ui tiny horizontal statistic">
-                    <div class="value">
-                      49"
-                    </div>
-                    <div class="label">
-                      Snow Depth
-                    </div>
-                  </div>
+                <a class="header">
+                  <p id="weather">*Forecast* | *Snow Pack*</p>
                 </a>
                 <div class="ui divider"></div>
-                <a class="ui centered header">
-                  <div class="ui mini statistic">
-                    <div class="value">
-                      12
-                    </div>
-                    <div class="label">
-                      Lifts
-                    </div>
-                  </div>
-                  <div class="ui mini statistic">
-                    <div class="value">
-                      85
-                    </div>
-                    <div class="label">
-                      Runs
-                    </div>
-                  </div>
-                  <div class="ui mini statistic">
-                    <div class="value">
-                      7800
-                    </div>
-                    <div class="label">
-                      Base
-                    </div>
-                  </div>
-                  <div class="ui mini statistic">
-                    <div class="value">
-                      9800
-                    </div>
-                    <div class="label">
-                      Summit
-                    </div>
-                  </div>
-                </a>
+                <p id="elevation">Base 7800 | Summit 9800</p>
+                <div class="ui divider"></div>
+                <p id="lifts">12 Lifts | 85 Runs</p>
               </div>
               <div class="content">
                 <div class="ui stackable three item menu">
@@ -126,7 +79,7 @@
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
     </section>
   </body>
 </html>

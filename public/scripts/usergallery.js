@@ -37,7 +37,7 @@ function render(resortsArr) {
 };
 
 function getTemplate(resortObj) {
-  fetch(`/api/v1/resorts/${resortObj.lat}/${resortObj.lng}`, {
+  fetch(`/api/v1/weather/snowdepth/${resortObj.lat}/${resortObj.lng}`, {
      method: 'GET',
      headers: {
        "Content-Type": "application/json",
@@ -57,3 +57,6 @@ function getTemplate(resortObj) {
      })
      .catch((err) => console.log(err));
  };
+
+ /* Semantic UI  */
+$(".ui.accordion").accordion();
