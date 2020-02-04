@@ -18,15 +18,17 @@ console.log('usergallery JS connected...');
 
 const cardGallery = document.getElementById('cardGallery');
 
-const currentUserId = "5e34ac0393955c298bfddf1f"
-
-fetch(`/api/v1/users/${currentUserId}`, {
-  method: 'GET'
+fetch('/api/v1/users/userResorts', {
+  method: 'GET',
+  headers: {
+    "credentials": "include"
+  }
 })
   .then((dataStream) => dataStream.json())
   .then((dataObj) => {
-    console.log(dataObj.data.userResorts);
-    render(dataObj.data.userResorts);
+    console.log(dataObj);
+    console.log(dataObj.data);
+    render(dataObj.data);
   })
   .catch((err) => console.log(err));
 
