@@ -31,76 +31,123 @@ fetch('/api/v1/resorts', {
 function render(resortsArr) {
   resortsArr.map((resort) => {
     getTemplate(resort);
-    // getAverageTemp(resort);
   });
 };
 
 function getTemplate(resortObj) {
   fetch(`/api/v1/weather/snowdepth/${resortObj.lat}/${resortObj.lng}`, {
-     method: 'GET',
-     headers: {
-       "Content-Type": "application/json",
-     }
-   })
-     .then((snowdepthDataStream) => snowdepthDataStream.json())
-     .then((snowdepthDataObj) => {
-       console.log(snowdepthDataObj);
-       console.log(resortObj);
-       const cardTemplate = `
-       <div class="ui accordion gallery-card">
-        <div class="title">
-          <div class="ui fluid card">
-            <div class="ui content">
-              <a class="titleBar header" id="${resortObj._id}">
-                <i class="snowflake icon"> </i>${resortObj.name}
-                
-              </a>
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json",
+    }
+  })
+    .then((snowdepthDataStream) => snowdepthDataStream.json())
+    .then((snowdepthDataObj) => {
+      console.log(snowdepthDataObj);
+      console.log(resortObj);
+
+      const cardTemplate = `
+        <div class="ui accordion gallery-card">
+          <div class="title">
+            <div class="ui fluid card">
+              <div class="ui content">
+                <a class="titleBar header" id="${resortObj._id}">
+                  <i class="snowflake icon"> </i>${resortObj.name}
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="content">
-          <div class="resort-info">
-            <div class="ui card fluid">
-              <div class="content">
-                <a class="header">
-                  <p id="weather">*Forecast: <span id="temperature_${resortObj._id}"></span>* | *Snow Pack: <span id="snowdepth_${resortObj._id}">${snowdepthDataObj.response.periods[0].snowDepthIN}</span> in*</p>
-                </a>
-                <div class="ui divider"></div>
-                <p id="elevation">Base ${resortObj.elevation_base} | Summit ${resortObj.elevation_summit}</p>
-                <div class="ui divider"></div>
-                <p id="lifts">${resortObj.lifts} Lifts | ${resortObj.runs} Runs</p>
-              </div>
-              <div class="content">
-                <div class="ui stackable three item menu">
-                  <a class="item" href="${resortObj.mainWebsite}"
-                    ><i class="linkify icon"></i>Website</a
-                  >
-                  <a
-                    class="item"
-                    href="${resortObj.ticketWebsite}"
-                    ><i class="linkify icon"></i>Tickets</a
-                  >
-                  <a class="item" href="tel:${resortObj.phoneNumber}"
-                    ><i class="phone square icon"></i>${resortObj.phoneNumber}</a
-                  >
+          <div class="content">
+            <div class="resort-info">
+              <div class="ui card fluid">
+                <div class="content">
+                  <a class="ui centered header">
+                    <div class="ui tiny horizontal statistic">
+                      <div class="value">
+                        <span id="temperature_${resortObj._id}"></span>
+                      </div>
+                      <div class="label">
+                        Daytime Avg
+                      </div>
+                    </div>
+                    <div class="ui divider"></div>
+                    <div class="ui tiny horizontal statistic">
+                      <div class="value">
+                        <span id="snowdepth_${resortObj._id}">${snowdepthDataObj.response.periods[0].snowDepthIN}"</span>
+                      </div>
+                      <div class="label">
+                        Snow Depth
+                      </div>
+                    </div>
+                  </a>
+                  <div class="ui divider"></div>
+                  <a class="ui centered header">
+                    <div class="ui mini statistic">
+                      <div class="value">
+                        ${resortObj.lifts}
+                      </div>
+                      <div class="label">
+                        Lifts
+                      </div>
+                    </div>
+                    <div class="ui mini statistic">
+                      <div class="value">
+                        ${resortObj.runs}
+                      </div>
+                      <div class="label">
+                        Runs
+                      </div>
+                    </div>
+                    <div class="ui mini statistic">
+                      <div class="value">
+                        ${resortObj.elevation_base}
+                      </div>
+                      <div class="label">
+                        Base
+                      </div>
+                    </div>
+                    <div class="ui mini statistic">
+                      <div class="value">
+                        ${resortObj.elevation_summit}
+                      </div>
+                      <div class="label">
+                        Summit
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="content">
+                  <div class="ui stackable three item menu">
+                    <a class="item" href="${resortObj.mainWebsite}"
+                      ><i class="linkify icon"></i>Website</a
+                    >
+                    <a
+                      class="item"
+                      href="${resortObj.ticketWebsite}"
+                      ><i class="linkify icon"></i>Tickets</a
+                    >
+                    <a class="item" href="${resortObj.phoneNumber}"
+                      ><i class="phone square icon"></i>${resortObj.phoneNumber}</a
+                    >
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
-     `
+      `
+
       cardGallery.insertAdjacentHTML('beforeend', cardTemplate);
 
       getAverageTemp(resortObj);
 
       $('.ui.accordion').accordion('refresh');
-     })
-     .catch((err) => console.log(err));
+    })
+    .catch((err) => console.log(err));
  };
 
 function getAverageTemp(resortObj) {
-   fetch(`/api/v1/weather/temperature/${resortObj.lat}/${resortObj.lng}`, {
+  fetch(`/api/v1/weather/temperature/${resortObj.lat}/${resortObj.lng}`, {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
