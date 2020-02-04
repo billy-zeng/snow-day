@@ -53,7 +53,7 @@ function handleSignupSubmit(event) {
       formIsValid = false;
       // add red border to input
       input.classList.add('input-error');
-      console.log(`Your user must be at least 2 characters long. `);
+      console.log(`Your password must be at least 5 characters long. `);
       errorMessage.insertAdjacentHTML('beforeend', `<p>Your password must be at least 5 characters long. </p>`);
     };
 
