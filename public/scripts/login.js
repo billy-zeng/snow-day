@@ -90,7 +90,9 @@ function handleLoginSubmit(event) {
       .then((response) => response.json())
       .then((dataObj) => {
         console.log(dataObj);
-        // window.location = '/maingallery';
+        if(dataObj.foundUser._id){
+          window.location = '/maingallery';
+        } else console.log(dataObj);
       })
       .catch((err) => {
         console.log(err);

@@ -35,28 +35,6 @@ function render(resortsArr) {
   });
 };
 
-// function getTemplate(resortObj) {
-//  fetch(`/api/v1/resorts/${resortObj.lat}/${resortObj.lng}`, {
-//     method: 'GET',
-//     headers: {
-//       "Content-Type": "application/json",
-//     }
-//   })
-//     .then((snowdepthDataStream) => snowdepthDataStream.json())
-//     .then((snowdepthDataObj) => {
-//       console.log(snowdepthDataObj);
-//       console.log(resortObj);
-//       const cardTemplate = `
-//       <p>${resortObj.name}</p>
-//       <p>${resortObj.address}</p>
-//       <p>${resortObj.phoneNumber}</p>
-//       <p>Estimated snow depth: ${snowdepthDataObj.response.periods[0].snowDepthIN}</p>
-//     `
-//       cardGallery.insertAdjacentHTML('beforeend', cardTemplate);
-//     })
-//     .catch((err) => console.log(err));
-// };
-
 function getTemplate(resortObj) {
   fetch(`/api/v1/weather/snowdepth/${resortObj.lat}/${resortObj.lng}`, {
      method: 'GET',
@@ -85,7 +63,7 @@ function getTemplate(resortObj) {
             <div class="ui card fluid">
               <div class="content">
                 <a class="header">
-                  <p id="weather">*<span id="temperature_${resortObj._id}">Forecast: </span>* | *Snow Pack: *</p>
+                  <p id="weather">*Forecast: <span id="temperature_${resortObj._id}"></span>* | *Snow Pack: <span id="snowdepth_${resortObj._id}">${snowdepthDataObj.response.periods[0].snowDepthIN}</span> in*</p>
                 </a>
                 <div class="ui divider"></div>
                 <p id="elevation">Base ${resortObj.elevation_base} | Summit ${resortObj.elevation_summit}</p>
@@ -114,35 +92,38 @@ function getTemplate(resortObj) {
      `
       cardGallery.insertAdjacentHTML('beforeend', cardTemplate);
 
-      // logic to determine if we should append sun icon
-      // if (snowdepthDataObj.response.periods[0].snowDepthIN > 20){
-      //   document.getElementById(resortObj._id).insertAdjacentHTML('beforeend', '<i class="right floated sun outline icon"></i>');
-      // }
-      // getAverageTemp(resortObj);
+      getAverageTemp(resortObj);
+
       $('.ui.accordion').accordion('refresh');
      })
      .catch((err) => console.log(err));
  };
 
-// function getAverageTemp(resortObj) {
-//    fetch(`/api/v1/weather/temperature/${resortObj.lat}/${resortObj.lng}`, {
-//     method: 'GET',
-//     headers: {
-//       "Content-Type": "application/json",
-//     }
-//   })
-//     .then((temperatureDataStream) => temperatureDataStream.json())
-//     .then((temperatureDataObj) => {
-//       console.log(temperatureDataObj);
-//       let tempSum;
-//       temperatureDataObj.response.periods.forEach((day) => {
-//         tempSum += day.avgTempF;
-//       });
-//       const avgTemperature = tempSum/7;
-//       document.getElementById(`temperature_${resortObj_id}`).insertAdjacentHTML('beforeend', avgTemperature);
-//     })
-//     .catch((err) => console.log(err));
-// }
+function getAverageTemp(resortObj) {
+   fetch(`/api/v1/weather/temperature/${resortObj.lat}/${resortObj.lng}`, {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json",
+    }
+  })
+    .then((temperatureDataStream) => temperatureDataStream.json())
+    .then((temperatureDataObj) => {
+      console.log(temperatureDataObj);
+      let tempSum = 0;
+      temperatureDataObj.response[0].periods.forEach((day) => {
+        tempSum += day.avgTempF;
+      });
+      const avgTemperature = Math.round(tempSum/7);
+      document.getElementById(`temperature_${resortObj._id}`).insertAdjacentHTML('beforeend', avgTemperature);
+      
+      // logic to determine if we should append sun icon
+      const snowdepth = document.getElementById(`snowdepth_${resortObj._id}`);
+      if (parseInt(snowdepth.innerText) > 20 && avgTemperature < 30) {
+        document.getElementById(resortObj._id).insertAdjacentHTML('beforeend', '<i class="right floated sun outline icon"></i>');
+      }
+    })
+    .catch((err) => console.log(err));
+}
 
 /* Semantic UI  */
 $(".ui.accordion").accordion();
