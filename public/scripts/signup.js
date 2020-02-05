@@ -125,11 +125,7 @@ function handleSignupSubmit(event) {
       .then(response => response.json())
       .then(dataObj => {
         console.log(dataObj);
-<<<<<<< HEAD
         window.location = "/login";
-=======
-        // window.location = '/login';
->>>>>>> submaster
       })
       .catch(err => console.log(err));
   }

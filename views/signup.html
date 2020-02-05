@@ -11,7 +11,7 @@
     ></script>
     <script defer src="/vendor/semantic.js"></script>
     <!-- Internal JS -->
-    <script src="/scripts/signup.js" defer></script>
+    <script src="/scripts/signupTEST.js" defer></script>
     <script src="/scripts/app.js" defer></script>
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/semantic.css" />
@@ -32,17 +32,20 @@
 
       <form class="ui large form" id="signupForm">
         <div class="field">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            id="name"
-            name="username"
-            placeholder="Username"
-            data-name="username"
-        >
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input
+              type="text"
+              id="name"
+              name="username"
+              placeholder="Username"
+              data-name="username"
+            />
+          </div>
         </div>
-          <div class="field">
-            <label for="email">E-mail</label>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="envelope icon"></i>
             <input
               type="email"
               id="email"
@@ -51,8 +54,10 @@
               data-name="email"
             />
           </div>
-          <div class="field">
-            <label for="password">Password</label>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
             <input
               type="password"
               id="password"
@@ -61,8 +66,10 @@
               data-name="password"
             />
           </div>
-          <div class="field">
-            <label for="passwordConfirm">Confirm Password</label>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="check circle icon"></i>
             <input
               type="password"
               id="passwordConfirm"
@@ -71,24 +78,44 @@
               data-name="passwordConfirm"
             />
           </div>
-          <div class="field">
-            <label for="proficiency">Skill Level</label>
+        </div>
+
+        <div class="field">
+          <div class="ui left icon input">
             <select
-              class="ui selection fluid dropdown"
+              class="ui selection icon fluid dropdown"
               name="proficiency"
               id="proficiency"
             >
-              <option value="">Select Skill Level</option>
+              <option value="">
+                <!-- <span id="star">&#8902;</span> -->
+                Select Skill Level</option
+              >
               <option value="beginner">Beginner</option>
               <option value="intermediate">Intermediate</option>
               <option value="advanced">Advanced</option>
             </select>
           </div>
-
-          <div class="ui divider"></div>
-
-          <button class="ui button fluid" type="submit">Register</button>
         </div>
+        <!-- <div class="ui fluid icon dropdown button">
+          <i class="star outline icon"></i>
+          <span class="text">Select Skill Level</span>
+          <div class="menu">
+            <div class="item">
+              Beginner
+            </div>
+            <div class="item">
+              Intermediate
+            </div>
+            <div class="item">
+              Expert
+            </div>
+          </div>
+        </div> -->
+        <div class="ui divider"></div>
+
+        <button class="ui button fluid" type="submit">Register</button>
+
         <div class="ui error message"></div>
       </form>
     </section>

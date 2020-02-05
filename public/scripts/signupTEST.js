@@ -71,3 +71,5 @@ $(".ui.form").form({
     }
   }
 });
+/* Semantic UI */
+$(".ui.dropdown").dropdown();
