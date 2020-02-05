@@ -11,7 +11,6 @@ logoutButton.addEventListener('click', (event) => {
       if(data.status === 200){
         window.location = '/';
       } else console.log(data);
-      // console.log(data);
     })
     .catch((err) => console.log(err));
 });
@@ -212,19 +211,6 @@ fetch(`/api/v1/weather/temperature/${resortObj.lat}/${resortObj.lng}`, {
   })
   .catch((err) => console.log(err));
 }
-
-function addResort(resortId){
-  fetch(`/api/v1/users/userResorts/${resortId}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      "credentials": "include"
-    }  
-  })
-    .then((updatedUser) => updatedUser.json())
-    .then((updatedUserObj) => console.log(updatedUserObj))
-    .catch(err => console.log(err));
-};
 
 function removeResort(resortId){
   fetch(`/api/v1/users/userResorts/${resortId}`, {

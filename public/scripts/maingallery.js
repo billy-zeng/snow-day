@@ -11,13 +11,13 @@ logoutButton.addEventListener('click', (event) => {
       if(data.status === 200){
         window.location = '/';
       } else console.log(data);
-      // console.log(data);
     })
     .catch((err) => console.log(err));
 });
 
 const cardGallery = document.getElementById("cardGallery");
 
+// fetch to get all resort data
 fetch("/api/v1/resorts", {
   method: "GET"
 })
@@ -46,6 +46,7 @@ function getTemplate(resortObj) {
   //     console.log(snowdepthDataObj);
   //     console.log(resortObj);
 
+      // break this out into another function?
       const cardTemplate = `
         <div class="ui accordion gallery-card">
           <div class="title">
@@ -116,7 +117,7 @@ function getTemplate(resortObj) {
                     </div>
                   </a>
                 </div>
-                <div class="content">
+                <div class="content" id="content_${resortObj._id}">
                   <div class="ui stackable four item menu">
                     <a class="item" href="${resortObj.mainWebsite}"
                       ><i class="linkify icon"></i>Website</a
@@ -129,8 +130,8 @@ function getTemplate(resortObj) {
                     <a class="item" href="${resortObj.phoneNumber}"
                       ><i class="phone square icon"></i>${resortObj.phoneNumber}</a
                     >
-                    <div class="ui item toggle checkbox">
-                      <input type="checkbox" name="favorite" data-resortid="${resortObj._id}" />
+                    <div class="ui item toggle checkbox checked" id="toggleBox_${resortObj._id}">
+                      <input type="checkbox" name="favorite" data-resortid="${resortObj._id}" id="checkbox_${resortObj._id}" />
                       <label>Favorite</label>
                     </div>
                   </div>
@@ -142,6 +143,7 @@ function getTemplate(resortObj) {
       `;
 
       cardGallery.insertAdjacentHTML("beforeend", cardTemplate);
+      setToggleBox(resortObj._id);
 
       // getAverageTemp(resortObj);
 
@@ -151,6 +153,7 @@ function getTemplate(resortObj) {
 //     .catch(err => console.log(err));
 }
 
+// calculates average daily temperature forecast for the upcoming week
 function getAverageTemp(resortObj) {
   fetch(`/api/v1/weather/temperature/${resortObj.lat}/${resortObj.lng}`, {
     method: "GET",
@@ -184,6 +187,37 @@ function getAverageTemp(resortObj) {
     .catch(err => console.log(err));
 }
 
+// sets toggle boxes of resorts that are already in user's userResort array to CHECKED
+function setToggleBox(resortId){
+  console.log(resortId);
+  fetch('/api/v1/users/userResorts', {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "credentials": "include"
+    } 
+  })
+    .then((userResortsDataStream) => userResortsDataStream.json())
+    .then((userResorts) => {
+      console.log(userResorts.data);
+      const resortIdArr = userResorts.data.map((userResort) => {
+        return userResort._id;
+      })
+      console.log(resortIdArr);
+
+      if(resortIdArr.includes(resortId)){
+        document.getElementById(`toggleBox_${resortId}`).classList.add('checked');
+        document.getElementById(`checkbox_${resortId}`).setAttribute('checked', "");
+
+        console.log(resortId);
+      } else {
+        console.log("not in this user's resorts")
+      }
+    })
+    .catch(err => console.log(err));
+}
+
+// adds resort to user's saved resorts
 function addResort(resortId){
   fetch(`/api/v1/users/userResorts/${resortId}`, {
     method: "PUT",
@@ -197,6 +231,7 @@ function addResort(resortId){
     .catch(err => console.log(err));
 };
 
+// removes a saved resort from user's userResort array
 function removeResort(resortId){
   fetch(`/api/v1/users/userResorts/${resortId}`, {
     method: "DELETE",
@@ -216,6 +251,7 @@ $(".ui.accordion").accordion();
 $(".checkbox").checkbox("attach events", ".toggle.button");
 $(".checkbox").checkbox("attach events", ".check.button", "check");
 $(".checkbox").checkbox("attach events", ".uncheck.button", "uncheck");
+
 $("body").on("click", ".checkbox > label", event => {
   console.log(event.target);
   console.log(event.target.previousElementSibling.checked);
