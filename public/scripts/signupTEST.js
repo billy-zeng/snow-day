@@ -5,8 +5,28 @@ form.addEventListener("submit", handleSignUp);
 
 function handleSignUp(event) {
   event.preventDefault();
+  const userData = {}; 
   if ($(".ui.form").form("is valid")) {
     console.log("success");
+
+    const formInputs = [...signupForm.elements];    // array of input form elements
+    formInputs.forEach((input) => {
+      userData[input.name] = input.value;
+    });
+
+    fetch('/api/v1/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((response) => response.json())
+      .then((dataObj) => {
+        console.log(dataObj);
+        window.location = '/login';
+      })
+      .catch((err) => console.log(err));
   }
 }
 
