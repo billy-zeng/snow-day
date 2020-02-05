@@ -11,7 +11,7 @@
     ></script>
     <script defer src="/vendor/semantic.js"></script>
     <!-- Internal JS -->
-    <script src="/scripts/signup.js" defer></script>
+    <script src="/scripts/signupTEST.js" defer></script>
     <script src="/scripts/app.js" defer></script>
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/semantic.css" />
@@ -36,7 +36,7 @@
             <i class="user icon"></i>
             <input
               type="text"
-              id="name"
+              id="username"
               name="username"
               placeholder="Username"
               data-name="username"
@@ -120,7 +120,7 @@
 
         <button class="ui button fluid" type="submit">Register</button>
 
-        <div class="ui error message"></div>
+        <div class="ui error message" id="errorZone"></div>
       </form>
     </section>
   </body>
