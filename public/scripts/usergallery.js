@@ -267,3 +267,19 @@ $("body").on("click", ".checkbox > label", event => {
 });
 
 // ${snowdepthDataObj.response.periods[0].snowDepthIN}" --- SNOW DEPTH value; removed for testing
+
+$("body").on("click", ".checkbox > label", event => {
+  if (!event.target.previousElementSibling.checked) {
+    $(".ui.modal").modal("show");
+    console.log(event.target.previousElementSibling.dataset.resortid);
+  }
+});
+$("body").on("click", ".cancel", () => {
+  $(".ui.modal").modal("hide");
+  $("");
+  console.log("canceled");
+});
+$("body").on("click", ".approve", () => {
+  $(".ui.modal").modal("hide");
+  console.log("approved");
+});

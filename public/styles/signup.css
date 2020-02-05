@@ -12,6 +12,6 @@ body {
   background-size: cover;
   background-attachment: fixed;
 }
-.star {
-  font-size: 100px;
+#star {
+  color: #949494;
 }

@@ -11,7 +11,7 @@
     ></script>
     <script defer src="/vendor/semantic.js"></script>
     <!-- Internal JS -->
-    <script src="/scripts/signupTEST.js" defer></script>
+    <script src="/scripts/signup.js" defer></script>
     <script src="/scripts/app.js" defer></script>
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/semantic.css" />
@@ -79,39 +79,43 @@
             />
           </div>
         </div>
-
+        <!-- 
         <div class="field">
           <div class="ui left icon input">
-            <select
-              class="ui selection icon fluid dropdown"
-              name="proficiency"
-              id="proficiency"
-            >
-              <option value="">
-                <!-- <span id="star">&#8902;</span> -->
-                Select Skill Level</option
-              >
-              <option value="beginner">Beginner</option>
-              <option value="intermediate">Intermediate</option>
-              <option value="advanced">Advanced</option>
-            </select>
-          </div>
-        </div>
-        <!-- <div class="ui fluid icon dropdown button">
           <i class="star outline icon"></i>
-          <span class="text">Select Skill Level</span>
-          <div class="menu">
-            <div class="item">
-              Beginner
-            </div>
-            <div class="item">
-              Intermediate
-            </div>
-            <div class="item">
-              Expert
-            </div>
+          <select
+            class="ui selection icon fluid dropdown"
+            name="proficiency"
+            id="proficiency"
+          >
+            <option value="">
+
+              Select Skill Level</option
+            >
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
           </div>
         </div> -->
+
+        <div class="field">
+          <div class="ui fluid icon selection dropdown">
+            <i id="star" class="star icon default"></i>
+            <span class="text default">Select Skill Level</span>
+            <div class="menu">
+              <div class="item skill">
+                Beginner
+              </div>
+              <div class="item skill">
+                Intermediate
+              </div>
+              <div class="item skill">
+                Expert
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="ui divider"></div>
 
         <button class="ui button fluid" type="submit">Register</button>

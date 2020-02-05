@@ -1,6 +1,7 @@
 console.log("Signup JS connected...");
 
 const signupForm = document.getElementById("signupForm");
+let proficiency = "";
 
 // Submit Event Listener
 signupForm.addEventListener("submit", handleSignupSubmit);
@@ -8,7 +9,7 @@ signupForm.addEventListener("submit", handleSignupSubmit);
 // Handle Signup Submit
 function handleSignupSubmit(event) {
   let formIsValid = true; // track form validation
-  const userData = {}; // user data object
+  const userData = { proficiency }; // user data object
   event.preventDefault(); // prevent default page refresh
 
   // Clear alert messages
@@ -150,3 +151,9 @@ function isEmailFormatCorrect(email) {
 
 /* Semantic UI */
 $(".ui.dropdown").dropdown();
+
+$(".skill").on("click", event => {
+  proficiency = event.target.innerText.toLowerCase;
+
+  console.log(proficiency);
+});
