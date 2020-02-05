@@ -1,20 +1,20 @@
 console.log("maingallery JS connected...");
 
-// const logoutButton = document.getElementById('logout');
+const logoutButton = document.getElementById("logout");
 
-// logoutButton.addEventListener('click', (event) => {
-//   event.preventDefault();
-//   fetch('/api/v1/users/logout', {
-//     method: 'DELETE'
-//   })
-//     .then((dataStream) => dataStream.json())
-//     .then((data) => {
-//       if(data.status === 200){
-//         window.location = '/homepage';
-//       } else console.log(data);
-//     })
-//     .catch((err) => console.log(err));
-// });
+logoutButton.addEventListener("click", event => {
+  // event.preventDefault();
+  fetch("/api/v1/users/logout", {
+    method: "DELETE"
+  })
+    .then(dataStream => dataStream.json())
+    .then(data => {
+      if (data.status === 200) {
+        window.location = "/homepage";
+      } else console.log(data);
+    })
+    .catch(err => console.log(err));
+});
 
 const cardGallery = document.getElementById("cardGallery");
 
@@ -46,7 +46,7 @@ function getTemplate(resortObj) {
   //     console.log(snowdepthDataObj);
   //     console.log(resortObj);
 
-      const cardTemplate = `
+  const cardTemplate = `
         <div class="ui accordion gallery-card">
           <div class="title">
             <div class="ui fluid card">
@@ -141,14 +141,14 @@ function getTemplate(resortObj) {
         </div>
       `;
 
-      cardGallery.insertAdjacentHTML("beforeend", cardTemplate);
+  cardGallery.insertAdjacentHTML("beforeend", cardTemplate);
 
-      // getAverageTemp(resortObj);
+  // getAverageTemp(resortObj);
 
-      $(".ui.accordion").accordion("refresh");
-      $(".checkbox").checkbox("refresh");
-//     })
-//     .catch(err => console.log(err));
+  $(".ui.accordion").accordion("refresh");
+  $(".checkbox").checkbox("refresh");
+  //     })
+  //     .catch(err => console.log(err));
 }
 
 function getAverageTemp(resortObj) {
@@ -184,32 +184,31 @@ function getAverageTemp(resortObj) {
     .catch(err => console.log(err));
 }
 
-function addResort(resortId){
+function addResort(resortId) {
   fetch(`/api/v1/users/userResorts/${resortId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      "credentials": "include"
-    }  
+      credentials: "include"
+    }
   })
-    .then((updatedUser) => updatedUser.json())
-    .then((updatedUserObj) => console.log(updatedUserObj))
+    .then(updatedUser => updatedUser.json())
+    .then(updatedUserObj => console.log(updatedUserObj))
     .catch(err => console.log(err));
-};
+}
 
-function removeResort(resortId){
+function removeResort(resortId) {
   fetch(`/api/v1/users/userResorts/${resortId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      "credentials": "include"
-    }  
+      credentials: "include"
+    }
   })
-    .then((updatedUser) => updatedUser.json())
-    .then((updatedUserObj) => console.log(updatedUserObj))
+    .then(updatedUser => updatedUser.json())
+    .then(updatedUserObj => console.log(updatedUserObj))
     .catch(err => console.log(err));
-};
-
+}
 
 /* Semantic UI  */
 $(".ui.accordion").accordion();
@@ -222,11 +221,11 @@ $("body").on("click", ".checkbox > label", event => {
   // console.log(event.target.previousElementSibling);
   let targetResortId = event.target.previousElementSibling.dataset.resortid;
   console.log(targetResortId);
-  if(event.target.previousElementSibling.checked){
+  if (event.target.previousElementSibling.checked) {
     addResort(targetResortId);
   } else {
     removeResort(targetResortId);
-  };
+  }
 });
 
 // ${snowdepthDataObj.response.periods[0].snowDepthIN}" --- SNOW DEPTH value; removed for testing
