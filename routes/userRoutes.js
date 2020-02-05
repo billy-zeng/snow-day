@@ -14,13 +14,22 @@ router.post("/", async (req, res) => {
         .status(400)
         .json({ message: "All fields are required for signup." });
     }
+    // validate unique username
+    const foundUsername = await DB.User.findOne({ username: req.body.username });
+    if (foundUsername) {
+      return res.status(400).json({
+        message:
+          "This account already exists. Please use a different username."
+      });
+    }
     // validate unique email
-    const foundUser = await DB.User.findOne({ email: req.body.email });
-    if (foundUser)
+    const foundEmail = await DB.User.findOne({ email: req.body.email });
+    if (foundEmail) {
       return res.status(400).json({
         message:
           "This account already exists. Please use a different email address."
       });
+    }
     // hash password and create user
     const hash = await bcrypt.hashSync(req.body.password, 10);
     userData.password = hash;

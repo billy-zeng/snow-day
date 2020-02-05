@@ -5,6 +5,10 @@ form.addEventListener("submit", handleSignUp);
 
 function handleSignUp(event) {
   event.preventDefault();
+
+  // Clear alert messages
+  document.querySelectorAll('.alert').forEach((alert) => alert.remove());
+
   const userData = {}; 
   if ($(".ui.form").form("is valid")) {
     console.log("success");
@@ -24,7 +28,11 @@ function handleSignUp(event) {
       .then((response) => response.json())
       .then((dataObj) => {
         console.log(dataObj);
-        window.location = '/login';
+        if(dataObj.status === 200) {
+          window.location = '/login';
+        } else {
+          signupForm.insertAdjacentHTML('beforeend', `<p class="alert error-message">${dataObj.message}</p>`);
+        }
       })
       .catch((err) => console.log(err));
   }
