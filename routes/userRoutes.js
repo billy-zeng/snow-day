@@ -177,7 +177,7 @@ router.delete('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) return res.status(400).json(err);
 
-    res.status(200).json({ message: 'Successfully logged out' });
+    res.json({ message: 'Successfully logged out' , status: 200});
     // res.redirect('/login');
   });  
 });

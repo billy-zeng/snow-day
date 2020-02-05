@@ -99,7 +99,7 @@ function handleSignupSubmit(event) {
       .then((response) => response.json())
       .then((dataObj) => {
         console.log(dataObj);
-        window.location = '/login';
+        // window.location = '/login';
       })
       .catch((err) => console.log(err));
   };

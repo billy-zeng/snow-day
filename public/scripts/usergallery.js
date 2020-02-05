@@ -1,36 +1,69 @@
 console.log('usergallery JS connected...');
 
-// const logoutButton = document.getElementById('logout');
+const logoutButton = document.getElementById('logout');
 
-// logoutButton.addEventListener('click', (event) => {
-//   event.preventDefault();
-//   fetch('/api/v1/users/logout', {
-//     method: 'DELETE'
-//   })
-//     .then((dataStream) => dataStream.json())
-//     .then((data) => {
-//       if(data.status === 200){
-//         window.location = '/homepage';
-//       } else console.log(data);
-//     })
-//     .catch((err) => console.log(err));
-// });
+logoutButton.addEventListener('click', (event) => {
+  fetch('/api/v1/users/logout', {
+    method: 'DELETE'
+  })
+    .then((dataStream) => dataStream.json())
+    .then((data) => {
+      if(data.status === 200){
+        window.location = '/';
+      } else console.log(data);
+      // console.log(data);
+    })
+    .catch((err) => console.log(err));
+});
 
 const cardGallery = document.getElementById('cardGallery');
 
-fetch('/api/v1/users/userResorts', {
-  method: 'GET',
-  headers: {
-    "credentials": "include"
-  }
+fetch("/api/v1/verify", {
+  method: "GET"
 })
-  .then((dataStream) => dataStream.json())
-  .then((dataObj) => {
-    console.log(dataObj);
-    console.log(dataObj.data);
-    render(dataObj.data);
+  .then((response) => {
+    console.log(response);
+    if(response.status === 200) {
+      displayUserResorts();
+    } else {
+      displayErrorMessage();
+    }
   })
   .catch((err) => console.log(err));
+
+function displayErrorMessage() {
+  cardGallery.insertAdjacentHTML('afterbegin', `
+    <section class="credentials">
+      <section class="logoblock">
+        <h1>SnowDay<i class="snowflake outline icon"></i></h1>
+      </section>
+      <div class="ui segment">
+        <p>
+          You must be logged in to view your personalized list of resorts.
+        </p>
+      </div>
+      <div class="ui two item menu">
+        <a class="ui item" href="signup">Sign Up</a>
+        <a class="ui item" href="login">Log In</a>
+      </div>
+    </section>`);
+}
+
+function displayUserResorts() {
+  fetch('/api/v1/users/userResorts', {
+    method: 'GET',
+    headers: {
+      "credentials": "include"
+    }
+  })
+    .then((dataStream) => dataStream.json())
+    .then((dataObj) => {
+      console.log(dataObj);
+      console.log(dataObj.data);
+      render(dataObj.data);
+    })
+    .catch((err) => console.log(err));
+}
 
 function render(resortsArr) {
   resortsArr.map((resort) => {
@@ -133,8 +166,8 @@ function getTemplate(resortObj) {
                     <a class="item" href="${resortObj.phoneNumber}"
                       ><i class="phone square icon"></i>${resortObj.phoneNumber}</a
                     >
-                    <div class="ui item toggle checkbox">
-                      <input type="checkbox" name="favorite" data-resortid="${resortObj._id}" />
+                    <div class="ui item toggle checkbox checked">
+                      <input type="checkbox" name="favorite" data-resortid="${resortObj._id}" checked/>
                       <label>Favorite</label>
                     </div>
                   </div>
