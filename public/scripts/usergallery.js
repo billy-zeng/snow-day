@@ -87,11 +87,11 @@ function getTemplate(resortObj) {
   //      console.log(resortObj);
 
   const cardTemplate = `
-        <div class="ui accordion gallery-card">
+        <div id="${resortObj._id}" class="ui accordion gallery-card">
           <div class="title">
             <div class="ui fluid card">
               <div class="ui content">
-                <a class="titleBar header" id="${resortObj._id}">
+                <a class="titleBar header">
                   <i class="snowflake icon"> </i>${resortObj.name}
                 </a>
               </div>
@@ -171,7 +171,7 @@ function getTemplate(resortObj) {
                     >
                     <div class="ui item toggle checkbox checked">
                       <input type="checkbox" name="favorite" data-resortid="${resortObj._id}" checked/>
-                      <label>Favorite</label>
+                      <label class="favorite">Favorite</label>
                     </div>
                   </div>
                 </div>
@@ -254,32 +254,42 @@ $(".ui.accordion").accordion();
 $(".checkbox").checkbox("attach events", ".toggle.button");
 $(".checkbox").checkbox("attach events", ".check.button", "check");
 $(".checkbox").checkbox("attach events", ".uncheck.button", "uncheck");
+
 $("body").on("click", ".checkbox > label", event => {
-  console.log(event.target);
-  console.log(event.target.previousElementSibling.checked);
-  let targetResortId = event.target.previousElementSibling.dataset.resortid;
-  console.log(targetResortId);
-  // if(event.target.previousElementSibling.checked){
-  //   addResort(targetResortId);
-  // } else {
-  removeResort(targetResortId);
-  // };
+  // console.log(event.target);
+  // console.log(event.target.previousElementSibling.checked);
+  // let targetResortId = event.target.previousElementSibling.dataset.resortid;
+  // console.log(targetResortId);
+  // // if(event.target.previousElementSibling.checked){
+  // //   addResort(targetResortId);
+  // // } else {
+  // removeResort(targetResortId);
+  // // };
 });
 
 // ${snowdepthDataObj.response.periods[0].snowDepthIN}" --- SNOW DEPTH value; removed for testing
 
-$("body").on("click", ".checkbox > label", event => {
-  if (!event.target.previousElementSibling.checked) {
-    $(".ui.modal").modal("show");
-    console.log(event.target.previousElementSibling.dataset.resortid);
+$("body").on("click", ".checkbox", event => {
+  const $parent = $(event.target).closest(".gallery-card");
+  const $checkbox = $(event.target).closest("label");
+  console.log($parent);
+  if (!$checkbox.checked) {
+    const $targetResort = $parent.attr("id");
+    console.log($targetResort);
+    $("#theModal").modal("show");
+    $("#theModal").data("resort", $targetResort);
   }
 });
 $("body").on("click", ".cancel", () => {
+  let $card = "";
+  $card = $("#theModal").data("resort");
+  $(`#${$card} .checkbox`).checkbox("check");
   $(".ui.modal").modal("hide");
-  $("");
-  console.log("canceled");
 });
+
 $("body").on("click", ".approve", () => {
+  let $card = "";
+  $card = $("#theModal").data("resort");
+  $(`#${$card}`).remove();
   $(".ui.modal").modal("hide");
-  console.log("approved");
 });
