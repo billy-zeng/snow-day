@@ -3,15 +3,15 @@ console.log("maingallery JS connected...");
 const logoutButton = document.getElementById("logout");
 
 logoutButton.addEventListener("click", event => {
-  // event.preventDefault();
   fetch("/api/v1/users/logout", {
     method: "DELETE"
   })
     .then(dataStream => dataStream.json())
     .then(data => {
       if (data.status === 200) {
-        window.location = "/homepage";
+        window.location = "/";
       } else console.log(data);
+      // console.log(data);
     })
     .catch(err => console.log(err));
 });

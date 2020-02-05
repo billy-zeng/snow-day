@@ -55,6 +55,20 @@ header nav {
 .ui.tiny.horizontal.statistic {
   margin: 0px;
 }
+.logoblock h1 {
+  font-family: "Pacifico", cursive;
+  font-size: 40px;
+  color: white;
+}
+.logoblock {
+  padding: 15px 5px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  height: 100px;
+  background-color: var(--bar);
+  border-radius: 5px;
+}
 @media only screen and (max-width: 500px) {
   header {
     padding: 0 10px;

@@ -44,7 +44,7 @@ app.get("/api/v1/verify", (req, res) => {
       .status(401)
       .json({ error: "unauthorized, please log in and try again." });
   }
-  res.status(200).json(req.session.user);
+  res.status(200).json(req.session.currentUser);
 });
 
 //———————————————————————— Server Start —————————————————————————//
