@@ -1,50 +1,13 @@
 console.warn("signupTest.js");
-const form = document.getElementById("signupForm");
+const signupForm = document.getElementById("signupForm");
+let proficiency = "";
 
-form.addEventListener("submit", handleSignUp);
-
-// function handleSignUp(event) {
-//   event.preventDefault();
-
-//   // Clear alert messages
-//   document.querySelectorAll('.alert').forEach((alert) => alert.remove());
-
-//   const userData = {}; 
-//   if ($(".ui.form").form("is valid")) {
-//     console.log("success");
-
-//     const formInputs = [...signupForm.elements];    // array of input form elements
-//     formInputs.forEach((input) => {
-//       userData[input.name] = input.value;
-//     });
-
-//     fetch('/api/v1/users', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify(userData),
-//     })
-//       .then((response) => response.json())
-//       .then((dataObj) => {
-//         console.log(dataObj);
-//         if(dataObj.status === 200) {
-//           window.location = '/login';
-//         } else {
-//           // signupForm.insertAdjacentHTML('beforeend', `<p class="alert error-message">${dataObj.message}</p>`);
-//           // signupForm.insertAdjacentHTML('beforeend', `<p class="alert error-message">${dataObj.message}</p>`);
-//           $('#errorZone').attr('display', 'block');
-//           $('#errorZone').prepend(`<ul class="list><li>${dataObj.message}</li></ul>`);
-//         }
-//       })
-//       .catch((err) => console.log(err));
-//   }
-// }
+signupForm.addEventListener("submit", handleSignUp);
 
 $(".ui.form").form({
   fields: {
     username: {
-      identifier: "name",
+      identifier: "username",
       rules: [
         {
           type: "empty",
@@ -105,11 +68,8 @@ $(".ui.form").form({
 
 function handleSignUp(event) {
   event.preventDefault();
+  const userData = { proficiency }; 
 
-  // Clear alert messages
-  document.querySelectorAll('.alert').forEach((alert) => alert.remove());
-
-  const userData = {}; 
   if ($(".ui.form").form("is valid")) {
     console.log("success");
 
@@ -131,15 +91,19 @@ function handleSignUp(event) {
         if(dataObj.status === 200) {
           window.location = '/login';
         } else {
-          // signupForm.insertAdjacentHTML('beforeend', `<p class="alert error-message">${dataObj.message}</p>`);
-          // signupForm.insertAdjacentHTML('beforeend', `<p class="alert error-message">${dataObj.message}</p>`);
           $('#errorZone').empty();
           $('#errorZone').css('display', 'block');
           $('#errorZone').prepend(`<ul class="list"><li>${dataObj.message}</li></ul>`);
-
-          // $(".ui.form").form("refresh");
         }
       })
       .catch((err) => console.log(err));
   }
 }
+
+/* Semantic UI */
+$(".ui.dropdown").dropdown();
+
+$(".skill").on("click", event => {
+  proficiency = event.target.innerText;
+  console.log(proficiency);
+})

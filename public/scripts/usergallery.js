@@ -235,6 +235,9 @@ $("body").on("click", ".checkbox > label", event => {
   console.log(event.target.previousElementSibling.checked);
   let targetResortId = event.target.previousElementSibling.dataset.resortid;
   console.log(targetResortId);
+
+  // document.getElementById(`modalId`).setAttribute('data-resortid', `${targetResortId}`);
+
   // if(event.target.previousElementSibling.checked){
   //   addResort(targetResortId);
   // } else {
