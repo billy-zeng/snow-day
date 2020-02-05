@@ -1,9 +1,9 @@
-console.log('Login JS connected...');
+console.log("Login JS connected...");
 
 const loginForm = document.getElementById('loginForm');
 
 // Submit Event Listener
-loginForm.addEventListener('submit', handleLoginSubmit);
+loginForm.addEventListener("submit", handleLoginSubmit);
 
 $(".ui.form").form({
   fields: {
@@ -44,21 +44,18 @@ function handleLoginSubmit(event) {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
-        "credentials": "include"
+        credentials: "include"
       },
-      body: JSON.stringify(userData),
+      body: JSON.stringify(userData)
     })
-      .then((response) => response.json())
-      .then((dataObj) => {
+      .then(response => response.json())
+      .then(dataObj => {
         console.log(dataObj);
-        if(dataObj.foundUser._id){
-          window.location = '/maingallery';
-        } else {
-          console.log(dataObj)
-
-        }
+        if (dataObj.foundUser._id) {
+          window.location = "/maingallery";
+        } else console.log(dataObj);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
         $('#errorZone').empty();
         $('#errorZone').css('display', 'block');

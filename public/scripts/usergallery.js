@@ -1,37 +1,39 @@
-console.log('usergallery JS connected...');
+console.log("usergallery JS connected...");
 
-const logoutButton = document.getElementById('logout');
+const logoutButton = document.getElementById("logout");
 
-logoutButton.addEventListener('click', (event) => {
-  fetch('/api/v1/users/logout', {
-    method: 'DELETE'
+logoutButton.addEventListener("click", event => {
+  fetch("/api/v1/users/logout", {
+    method: "DELETE"
   })
-    .then((dataStream) => dataStream.json())
-    .then((data) => {
-      if(data.status === 200){
-        window.location = '/';
+    .then(dataStream => dataStream.json())
+    .then(data => {
+      if (data.status === 200) {
+        window.location = "/";
       } else console.log(data);
     })
-    .catch((err) => console.log(err));
+    .catch(err => console.log(err));
 });
 
-const cardGallery = document.getElementById('cardGallery');
+const cardGallery = document.getElementById("cardGallery");
 
 fetch("/api/v1/verify", {
   method: "GET"
 })
-  .then((response) => {
+  .then(response => {
     console.log(response);
-    if(response.status === 200) {
+    if (response.status === 200) {
       displayUserResorts();
     } else {
       displayErrorMessage();
     }
   })
-  .catch((err) => console.log(err));
+  .catch(err => console.log(err));
 
 function displayErrorMessage() {
-  cardGallery.insertAdjacentHTML('afterbegin', `
+  cardGallery.insertAdjacentHTML(
+    "afterbegin",
+    `
     <section class="credentials">
       <section class="logoblock">
         <h1>SnowDay<i class="snowflake outline icon"></i></h1>
@@ -45,30 +47,31 @@ function displayErrorMessage() {
         <a class="ui item" href="signup">Sign Up</a>
         <a class="ui item" href="login">Log In</a>
       </div>
-    </section>`);
+    </section>`
+  );
 }
 
 function displayUserResorts() {
-  fetch('/api/v1/users/userResorts', {
-    method: 'GET',
+  fetch("/api/v1/users/userResorts", {
+    method: "GET",
     headers: {
-      "credentials": "include"
+      credentials: "include"
     }
   })
-    .then((dataStream) => dataStream.json())
-    .then((dataObj) => {
+    .then(dataStream => dataStream.json())
+    .then(dataObj => {
       console.log(dataObj);
       console.log(dataObj.data);
       render(dataObj.data);
     })
-    .catch((err) => console.log(err));
+    .catch(err => console.log(err));
 }
 
 function render(resortsArr) {
-  resortsArr.map((resort) => {
+  resortsArr.map(resort => {
     getTemplate(resort);
   });
-};
+}
 
 function getTemplate(resortObj) {
   // fetch(`/api/v1/weather/snowdepth/${resortObj.lat}/${resortObj.lng}`, {
@@ -81,8 +84,8 @@ function getTemplate(resortObj) {
   //    .then((snowdepthDataObj) => {
   //      console.log(snowdepthDataObj);
   //      console.log(resortObj);
-       
-       const cardTemplate = `
+
+  const cardTemplate = `
         <div class="ui accordion gallery-card">
           <div class="title">
             <div class="ui fluid card">
@@ -175,57 +178,64 @@ function getTemplate(resortObj) {
             </div>
           </div>
         </div>
-      `
-      cardGallery.insertAdjacentHTML('beforeend', cardTemplate);
+      `;
+  cardGallery.insertAdjacentHTML("beforeend", cardTemplate);
 
-      // getAverageTemp(resortObj);
+  // getAverageTemp(resortObj);
 
-      $('.ui.accordion').accordion('refresh');
-      $(".checkbox").checkbox("refresh");
-    //  })
-    //  .catch((err) => console.log(err));
- };
-
-function getAverageTemp(resortObj) {
-fetch(`/api/v1/weather/temperature/${resortObj.lat}/${resortObj.lng}`, {
-  method: 'GET',
-  headers: {
-    "Content-Type": "application/json",
-  }
-})
-  .then((temperatureDataStream) => temperatureDataStream.json())
-  .then((temperatureDataObj) => {
-    console.log(temperatureDataObj);
-    let tempSum = 0;
-    temperatureDataObj.response[0].periods.forEach((day) => {
-      tempSum += day.avgTempF;
-    });
-    const avgTemperature = Math.round(tempSum/7);
-    document.getElementById(`temperature_${resortObj._id}`).insertAdjacentHTML('beforeend', avgTemperature);
-    
-    // logic to determine if we should append sun icon
-    const snowdepth = document.getElementById(`snowdepth_${resortObj._id}`);
-    if (parseInt(snowdepth.innerText) > 20 && avgTemperature < 30) {
-      document.getElementById(resortObj._id).insertAdjacentHTML('beforeend', '<i class="right floated sun outline icon"></i>');
-    }
-  })
-  .catch((err) => console.log(err));
+  $(".ui.accordion").accordion("refresh");
+  $(".checkbox").checkbox("refresh");
+  //  })
+  //  .catch((err) => console.log(err));
 }
 
-function removeResort(resortId){
+function getAverageTemp(resortObj) {
+  fetch(`/api/v1/weather/temperature/${resortObj.lat}/${resortObj.lng}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(temperatureDataStream => temperatureDataStream.json())
+    .then(temperatureDataObj => {
+      console.log(temperatureDataObj);
+      let tempSum = 0;
+      temperatureDataObj.response[0].periods.forEach(day => {
+        tempSum += day.avgTempF;
+      });
+      const avgTemperature = Math.round(tempSum / 7);
+      document
+        .getElementById(`temperature_${resortObj._id}`)
+        .insertAdjacentHTML("beforeend", avgTemperature);
+
+      // logic to determine if we should append sun icon
+      const snowdepth = document.getElementById(`snowdepth_${resortObj._id}`);
+      if (parseInt(snowdepth.innerText) > 20 && avgTemperature < 30) {
+        document
+          .getElementById(resortObj._id)
+          .insertAdjacentHTML(
+            "beforeend",
+            '<i class="right floated sun outline icon"></i>'
+          );
+      }
+    })
+    .catch(err => console.log(err));
+}
+
+function removeResort(resortId) {
   fetch(`/api/v1/users/userResorts/${resortId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      "credentials": "include"
-    }  
+      credentials: "include"
+    }
   })
-    .then((updatedUser) => updatedUser.json())
-    .then((updatedUserObj) => console.log(updatedUserObj))
+    .then(updatedUser => updatedUser.json())
+    .then(updatedUserObj => console.log(updatedUserObj))
     .catch(err => console.log(err));
-};
+}
 
- /* Semantic UI  */
+/* Semantic UI  */
 $(".ui.accordion").accordion();
 $(".checkbox").checkbox("attach events", ".toggle.button");
 $(".checkbox").checkbox("attach events", ".check.button", "check");
@@ -241,8 +251,24 @@ $("body").on("click", ".checkbox > label", event => {
   // if(event.target.previousElementSibling.checked){
   //   addResort(targetResortId);
   // } else {
-    removeResort(targetResortId);
+  removeResort(targetResortId);
   // };
 });
 
 // ${snowdepthDataObj.response.periods[0].snowDepthIN}" --- SNOW DEPTH value; removed for testing
+
+$("body").on("click", ".checkbox > label", event => {
+  if (!event.target.previousElementSibling.checked) {
+    $(".ui.modal").modal("show");
+    console.log(event.target.previousElementSibling.dataset.resortid);
+  }
+});
+$("body").on("click", ".cancel", () => {
+  $(".ui.modal").modal("hide");
+  $("");
+  console.log("canceled");
+});
+$("body").on("click", ".approve", () => {
+  $(".ui.modal").modal("hide");
+  console.log("approved");
+});

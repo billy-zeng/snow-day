@@ -1,18 +1,18 @@
 console.log("maingallery JS connected...");
 
-const logoutButton = document.getElementById('logout');
+const logoutButton = document.getElementById("logout");
 
-logoutButton.addEventListener('click', (event) => {
-  fetch('/api/v1/users/logout', {
-    method: 'DELETE'
+logoutButton.addEventListener("click", event => {
+  fetch("/api/v1/users/logout", {
+    method: "DELETE"
   })
-    .then((dataStream) => dataStream.json())
-    .then((data) => {
-      if(data.status === 200){
-        window.location = '/';
+    .then(dataStream => dataStream.json())
+    .then(data => {
+      if (data.status === 200) {
+        window.location = "/";
       } else console.log(data);
     })
-    .catch((err) => console.log(err));
+    .catch(err => console.log(err));
 });
 
 const cardGallery = document.getElementById("cardGallery");
@@ -149,8 +149,8 @@ function getTemplate(resortObj) {
 
       $(".ui.accordion").accordion("refresh");
       $(".checkbox").checkbox("refresh");
-//     })
-//     .catch(err => console.log(err));
+      //     })
+      //     .catch(err => console.log(err));
 }
 
 // calculates average daily temperature forecast for the upcoming week
@@ -223,28 +223,26 @@ function addResort(resortId){
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      "credentials": "include"
-    }  
+      credentials: "include"
+    }
   })
-    .then((updatedUser) => updatedUser.json())
-    .then((updatedUserObj) => console.log(updatedUserObj))
+    .then(updatedUser => updatedUser.json())
+    .then(updatedUserObj => console.log(updatedUserObj))
     .catch(err => console.log(err));
-};
+}
 
-// removes a saved resort from user's userResort array
-function removeResort(resortId){
+function removeResort(resortId) {
   fetch(`/api/v1/users/userResorts/${resortId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      "credentials": "include"
-    }  
+      credentials: "include"
+    }
   })
-    .then((updatedUser) => updatedUser.json())
-    .then((updatedUserObj) => console.log(updatedUserObj))
+    .then(updatedUser => updatedUser.json())
+    .then(updatedUserObj => console.log(updatedUserObj))
     .catch(err => console.log(err));
-};
-
+}
 
 /* Semantic UI  */
 $(".ui.accordion").accordion();
@@ -258,11 +256,11 @@ $("body").on("click", ".checkbox > label", event => {
   // console.log(event.target.previousElementSibling);
   let targetResortId = event.target.previousElementSibling.dataset.resortid;
   console.log(targetResortId);
-  if(event.target.previousElementSibling.checked){
+  if (event.target.previousElementSibling.checked) {
     addResort(targetResortId);
   } else {
     removeResort(targetResortId);
-  };
+  }
 });
 
 // ${snowdepthDataObj.response.periods[0].snowDepthIN}" --- SNOW DEPTH value; removed for testing
