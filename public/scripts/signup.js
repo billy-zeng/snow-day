@@ -1,6 +1,7 @@
 const signupForm = document.getElementById("signupForm");
 let proficiency = "";
 
+// Signup Submit Event Listener
 $(signupForm).on("submit", handleSignUp);
 
 $(".ui.form").form({
@@ -65,16 +66,18 @@ $(".ui.form").form({
   }
 });
 
+// Handle Signup (Create new user)
 function handleSignUp(event) {
   event.preventDefault();
   const userData = { proficiency }; 
 
+  // Check if a skill level has been selected
   if($('#skillDefault').text() === "Select Skill Level"){
     $('#skill').addClass("error");
   } 
-
+  // if all input forms are valid, post request to create new user account
   if ($(".ui.form").form("is valid") && ($('#skillDefault').text() !== "Select Skill Level")) {
-    const formInputs = [...signupForm.elements];    // array of input form elements
+    const formInputs = [...signupForm.elements];
     formInputs.forEach((input) => {
       userData[input.name] = input.value;
     });
@@ -91,10 +94,10 @@ function handleSignUp(event) {
         if(dataObj.status === 200) {
           window.location = '/login';
         } else {
+          // return error message if submitted username or email already belongs to an existing account
           $('#errorZone').empty();
           $('#errorZone').css('display', 'block');
           $('#errorZone').prepend(`<ul class="list"><li>${dataObj.message}</li></ul>`);
-          
         }
       })
       .catch((err) => console.log(err));
