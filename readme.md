@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 —— SnowDay ——
 
 SnowDay is a website that compares Aeris Weather API data to a database of California
@@ -5,14 +6,29 @@ ski resorts to make planning trips to the snow easier. Weekly weather informatio
 snow depth are taken into account to identify "good" conditions, and resorts with "good" conditions are visually flagged accordingly. Users are able to add favorite resorts to a personal list, making checking on their preferred destinations simple. Resort information displays statistics about weather, the resorts' features, and provides quick access to their respective websites, ticketing websites, and phone contact.
 
 —— Technologies Used ——
+=======
+# —— **_SnowDay_** ——
+
+SnowDay is a website that makes it possible to quickly assess conditions at your favorite California Ski Resorts, and gives direct access to ticketing and contact information per resort.
+
+## —— Technologies Used ——
+>>>>>>> submaster
 
 - JavaScript
 - jQuery
 - Semantic UI
+<<<<<<< HEAD
 - MongoDB
 - Mongoose
 
 —— Existing Features ——
+=======
+- Node.js
+- MongoDB
+- Mongoose
+
+## —— Current Features ——
+>>>>>>> submaster
 
 - Landing on the front page, users can click through to log in or create an account.
 - On the login page, frontend validation will prompt the user to fill unfilled fields. Backend validation will prompt the user if the username or email is invalid.
@@ -35,8 +51,42 @@ snow depth are taken into account to identify "good" conditions, and resorts wit
 - The user may log out at any time by clicking the 'Log Out' button on the top navbar.
 - Logging out returns the user to the front page.
 
+<<<<<<< HEAD
 —— Planned Features ——
 
 - Expanding the Resort database to include information about run difficulty distribution, ie, greens vs blues vs black diamons vs double blacks, and to allow the user to see if the resort is suited to their own skill level.
 - The ability for users to leave comments or ratings on individual resorts.
 - A display on each resort that indicates how many users have 'favorited' it.
+=======
+## —— Planned Features ——
+
+- Expanding the Resort database to include information about run difficulty distribution, ie, greens vs blues vs black diamonds vs double black diamonds, and give suggestions to the user about the suitability to their own skill level.
+- The ability for users to leave comments or ratings on individual resorts.
+- A display on each resort that indicates how many users have added it as a favorite.
+
+## —— Screen Shots ——
+
+### Homepage
+
+![Homepage](/screenshots/ss_homepage.png)
+
+### Signup with Form Validation Messages
+
+![Signup](/screenshots/ss_signup.png)
+
+### Login
+
+![Login](/screenshots/ss_login.png)
+
+### Main Gallery View
+
+![Main Gallery](/screenshots/ss_gallery.png)
+
+### Expanded Resort Information
+
+![Resort Expanded](/screenshots/ss_resort_expanded.png)
+
+### Confirm Resort Removal Modal
+
+![Confirm Remove Modal](/screenshots/ss_modal.png)
+>>>>>>> submaster

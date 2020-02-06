@@ -6,8 +6,6 @@ const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 4000;
 
 const app = express();
-const path = require("path");
-const DB = require("./models");
 const routes = require("./routes");
 
 //————————————————————————— Middleware ——————————————————————————//

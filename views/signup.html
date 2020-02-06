@@ -36,7 +36,7 @@
             <i class="user icon"></i>
             <input
               type="text"
-              id="name"
+              id="username"
               name="username"
               placeholder="Username"
               data-name="username"
@@ -79,30 +79,12 @@
             />
           </div>
         </div>
-        <!-- 
-        <div class="field">
-          <div class="ui left icon input">
-          <i class="star outline icon"></i>
-          <select
-            class="ui selection icon fluid dropdown"
-            name="proficiency"
-            id="proficiency"
-          >
-            <option value="">
-
-              Select Skill Level</option
-            >
-            <option value="beginner">Beginner</option>
-            <option value="intermediate">Intermediate</option>
-            <option value="advanced">Advanced</option>
-          </select>
-          </div>
-        </div> -->
-
         <div id="skill" class="field">
           <div class="ui fluid icon selection dropdown">
             <i id="star" class="star icon default"></i>
-            <span class="text default">Select Skill Level</span>
+            <span id="skillDefault" class="text default"
+              >Select Skill Level</span
+            >
             <div class="menu">
               <div class="item skill">
                 Beginner
@@ -120,7 +102,7 @@
 
         <button class="ui button fluid" type="submit">Register</button>
 
-        <div class="ui error message"></div>
+        <div class="ui error message" id="errorZone"></div>
       </form>
     </section>
   </body>

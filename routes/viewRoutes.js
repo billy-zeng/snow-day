@@ -30,4 +30,5 @@ router.get('/usergallery', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/usergallery.html'));
 });
 
+//————————————————————————————— Export Module —————————————————————————————//
 module.exports = router;

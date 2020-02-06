@@ -16,12 +16,10 @@ router.get("/snowdepth/:lat/:lng", (req, res) => {
     })
     .then((snowdepthDataStream) => snowdepthDataStream.json())
     .then((snowdepthDataObj) => {
-      console.log(snowdepthDataObj);
       res.status(200).json(snowdepthDataObj);
     })
     .catch((err) => console.log(err));;
   } catch (err) {
-    console.log(err)
     return res.status(400).json({ message: "something went wrong!", err: err });
   }
 });
@@ -38,14 +36,13 @@ router.get("/temperature/:lat/:lng", (req, res) => {
     })
     .then((temperatureDataStream) => temperatureDataStream.json())
     .then((temperatureDataObj) => {
-      console.log(temperatureDataObj);
       res.status(200).json(temperatureDataObj);
     })
     .catch((err) => console.log(err));;
   } catch (err) {
-    console.log(err)
     return res.status(400).json({ message: "something went wrong!", err: err });
   }
 });
 
+//————————————————————————————— Export Module —————————————————————————————//
 module.exports = router;
