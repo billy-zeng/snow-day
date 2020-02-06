@@ -2,7 +2,8 @@ console.warn("signupTest.js");
 const signupForm = document.getElementById("signupForm");
 let proficiency = "";
 
-signupForm.addEventListener("submit", handleSignUp);
+// signupForm.addEventListener("submit", handleSignUp);
+$(signupForm).on("submit", handleSignUp);
 
 $(".ui.form").form({
   fields: {
@@ -70,7 +71,12 @@ function handleSignUp(event) {
   event.preventDefault();
   const userData = { proficiency }; 
 
-  if ($(".ui.form").form("is valid")) {
+  // if($('#skillDefault').text() === "Select Skill Level"){
+  //   $('#skill').addClass("error");
+  //   $('#errorZone').append(`<ul class="list"><li>Please select your skill level.</li></ul>`);
+  // } 
+
+  if ($(".ui.form").form("is valid") && ($('#skillDefault').text() !== "Select Skill Level")) {
     console.log("success");
 
     const formInputs = [...signupForm.elements];    // array of input form elements
@@ -94,10 +100,18 @@ function handleSignUp(event) {
           $('#errorZone').empty();
           $('#errorZone').css('display', 'block');
           $('#errorZone').prepend(`<ul class="list"><li>${dataObj.message}</li></ul>`);
+          
         }
       })
       .catch((err) => console.log(err));
   }
+
+  if($('#skillDefault').text() === "Select Skill Level"){
+    $('#skill').addClass("error");
+    console.log('Please select your skill level');
+    // $('#errorZone').css('display', 'block');
+    // $('#errorZone').append(`<ul class="list"><li>Please select your skill level.</li></ul>`);
+  } 
 }
 
 /* Semantic UI */
@@ -106,4 +120,5 @@ $(".ui.dropdown").dropdown();
 $(".skill").on("click", event => {
   proficiency = event.target.innerText;
   console.log(proficiency);
+  $('#skill').removeClass("error");
 })

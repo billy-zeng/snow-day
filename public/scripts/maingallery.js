@@ -35,24 +35,24 @@ function render(resortsArr) {
 }
 
 function getTemplate(resortObj) {
-  // fetch(`/api/v1/weather/snowdepth/${resortObj.lat}/${resortObj.lng}`, {
-  //   method: "GET",
-  //   headers: {
-  //     "Content-Type": "application/json"
-  //   }
-  // })
-  //   .then(snowdepthDataStream => snowdepthDataStream.json())
-  //   .then(snowdepthDataObj => {
-  //     console.log(snowdepthDataObj);
-  //     console.log(resortObj);
+  fetch(`/api/v1/weather/snowdepth/${resortObj.lat}/${resortObj.lng}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(snowdepthDataStream => snowdepthDataStream.json())
+    .then(snowdepthDataObj => {
+      console.log(snowdepthDataObj);
+      console.log(resortObj);
 
       // break this out into another function?
       const cardTemplate = `
-        <div class="ui accordion gallery-card">
+        <div id="${resortObj._id}" class="ui accordion gallery-card">
           <div class="title">
             <div class="ui fluid card">
               <div class="ui content">
-                <a class="titleBar header" id="${resortObj._id}">
+                <a class="titleBar header" id="titleBar_${resortObj._id}">
                   <i class="snowflake icon"> </i>${resortObj.name}
                 </a>
               </div>
@@ -65,7 +65,7 @@ function getTemplate(resortObj) {
                   <a class="ui centered header">
                     <div class="ui tiny horizontal statistic">
                       <div class="value">
-                        <span id="temperature_${resortObj._id}"></span>
+                        <span id="temperature_${resortObj._id}">˚</span>
                       </div>
                       <div class="label">
                         Daytime Avg
@@ -74,7 +74,7 @@ function getTemplate(resortObj) {
                     <div class="ui divider"></div>
                     <div class="ui tiny horizontal statistic">
                       <div class="value">
-                        <span id="snowdepth_${resortObj._id}">"</span>
+                        <span id="snowdepth_${resortObj._id}">${snowdepthDataObj.response.periods[0].snowDepthIN}"</span>
                       </div>
                       <div class="label">
                         Snow Depth
@@ -101,7 +101,7 @@ function getTemplate(resortObj) {
                     </div>
                     <div class="ui mini statistic">
                       <div class="value">
-                        ${resortObj.elevation_base}
+                        ${resortObj.elevation_base}"
                       </div>
                       <div class="label">
                         Base
@@ -109,7 +109,7 @@ function getTemplate(resortObj) {
                     </div>
                     <div class="ui mini statistic">
                       <div class="value">
-                        ${resortObj.elevation_summit}
+                        ${resortObj.elevation_summit}"
                       </div>
                       <div class="label">
                         Summit
@@ -145,12 +145,12 @@ function getTemplate(resortObj) {
       cardGallery.insertAdjacentHTML("beforeend", cardTemplate);
       setToggleBox(resortObj._id);
 
-      // getAverageTemp(resortObj);
+      getAverageTemp(resortObj);
 
       $(".ui.accordion").accordion("refresh");
       $(".checkbox").checkbox("refresh");
-      //     })
-      //     .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
 }
 
 // calculates average daily temperature forecast for the upcoming week
@@ -171,13 +171,13 @@ function getAverageTemp(resortObj) {
       const avgTemperature = Math.round(tempSum / 7);
       document
         .getElementById(`temperature_${resortObj._id}`)
-        .insertAdjacentHTML("beforeend", avgTemperature);
+        .insertAdjacentHTML("afterbegin", avgTemperature);
 
       // logic to determine if we should append sun icon
       const snowdepth = document.getElementById(`snowdepth_${resortObj._id}`);
-      if (parseInt(snowdepth.innerText) > 20 && avgTemperature < 30) {
+      if (parseInt(snowdepth.innerText) > 20 && avgTemperature < 35) {
         document
-          .getElementById(resortObj._id)
+          .getElementById(`titleBar_${resortObj._id}`)
           .insertAdjacentHTML(
             "beforeend",
             '<i class="right floated sun outline icon"></i>'
@@ -206,8 +206,9 @@ function setToggleBox(resortId){
       console.log(resortIdArr);
 
       if(resortIdArr.includes(resortId)){
-        document.getElementById(`toggleBox_${resortId}`).classList.add('checked');
-        document.getElementById(`checkbox_${resortId}`).setAttribute('checked', "");
+        // document.getElementById(`toggleBox_${resortId}`).classList.add('checked');
+        // document.getElementById(`checkbox_${resortId}`).setAttribute('checked', "");
+        $(`#toggleBox_${resortId}`).checkbox("check");
 
         console.log(resortId);
       } else {
@@ -250,16 +251,35 @@ $(".checkbox").checkbox("attach events", ".toggle.button");
 $(".checkbox").checkbox("attach events", ".check.button", "check");
 $(".checkbox").checkbox("attach events", ".uncheck.button", "uncheck");
 
-$("body").on("click", ".checkbox > label", event => {
-  console.log(event.target);
-  console.log(event.target.previousElementSibling.checked);
-  // console.log(event.target.previousElementSibling);
-  let targetResortId = event.target.previousElementSibling.dataset.resortid;
-  console.log(targetResortId);
-  if (event.target.previousElementSibling.checked) {
-    addResort(targetResortId);
+// $("body").on("click", ".checkbox > label", event => {
+//   console.log(event.target);
+//   console.log(event.target.previousElementSibling.checked);
+//   // console.log(event.target.previousElementSibling);
+//   let targetResortId = event.target.previousElementSibling.dataset.resortid;
+//   console.log(targetResortId);
+//   if (event.target.previousElementSibling.checked) {
+//     addResort(targetResortId);
+//   } else {
+//     removeResort(targetResortId);
+//   }
+// });
+
+$("body").on("click", ".checkbox", event => {
+  const $parent = $(event.target).closest(".gallery-card");
+  const $checkbox = $parent.find('input')[0];
+  const $labelParent = $(event.target).parent("div");
+  // console.log($parent);
+  // console.log($parent.attr("id"));
+  // console.log($checkbox);
+  console.log(event.target)
+  console.log($checkbox.checked)
+  // if (!event.target.checked || !$labelParent.checked) {
+
+  if ($checkbox.checked) {
+    // console.log($parent.attr("id"));
+    addResort($parent.attr("id"));
   } else {
-    removeResort(targetResortId);
+    removeResort($parent.attr("id"));
   }
 });
 
