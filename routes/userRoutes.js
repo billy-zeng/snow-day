@@ -3,6 +3,8 @@ const router = express.Router();
 const DB = require("../models");
 const bcrypt = require("bcryptjs");
 
+// routes start at localhost:4000/api/v1/users
+
 //———————————————————————— Create / Signup ————————————————————————//
 
 router.post("/", async (req, res) => {
@@ -58,29 +60,8 @@ router.get("/", (req, res) => {
   });
 });
 
-// //———————————————————————————— Show User ————————————————————————————//
-// router.get("/:id", (req, res) => {
-//   console.log(req.session.currentUser);
-//   DB.User.findById(req.params.id)
-//     .populate("userResorts")
-//     .exec((err, foundUser) => {
-//       if (err) {
-//         return res
-//           .status(400)
-//           .json({ message: "something went wrong!", err: err });
-//       }
-//       const resObj = {
-//         status: 200,
-//         data: foundUser,
-//         requestedAt: new Date().toLocaleString()
-//       };
-//       res.status(200).json(resObj);
-//     });
-// });
-
 //———————————————————————————— Show User Resorts ————————————————————————————//
 router.get("/userResorts", (req, res) => {
-  console.log(req.session.currentUser);
   DB.User.findById(req.session.currentUser)
     .populate("userResorts")
     .exec((err, foundUser) => {
@@ -101,19 +82,13 @@ router.get("/userResorts", (req, res) => {
 //————————————————————————————— Update User to Add Resort —————————————————————————————//
 
 router.put("/userResorts/:resort_id", async (req, res) => {
-// router.put("/:id/userResorts/:resort_id", async (req, res) => {
   try {
-    console.log(req.body);
     const updatedUser = await DB.User.findById(req.session.currentUser); // find user currently logged in
-    console.log(updatedUser.userResorts);
-
     updatedUser.userResorts.push(req.params.resort_id); // add resort to user by its ObjectId
     updatedUser.save(); // save changes to user
-    console.log(updatedUser);
     req.session.user = updatedUser; // update current session user -> optional but could be helpful so we don't do another DB query
     res.status(200).json(updatedUser);
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ message: "something went wrong", err: err });
   }
 });
@@ -121,18 +96,13 @@ router.put("/userResorts/:resort_id", async (req, res) => {
 //————————————————————————————— Update User to Remove Resort —————————————————————————————//
 
 router.delete("/userResorts/:resort_id", async (req, res) => {
-// router.delete("/:id/userResorts/:resort_id", async (req, res) => {
   try {
     let updatedUser = await DB.User.findById(req.session.currentUser); // find user currently logged in 
-    console.log(updatedUser);
-
     updatedUser.userResorts.pull({ _id: req.params.resort_id }) //remove a resort from user by its ObjectId
     updatedUser.save(); // save changes to user
-    console.log(updatedUser);
     req.session.user = updatedUser; // update current session user -> optional but could be helpful so we don't do another DB query
     res.status(200).json(updatedUser);
   } catch (err) {
-    console.log(err)
     return res.status(500).json({ message: "something went wrong", err: err });
   };
 });
@@ -147,7 +117,6 @@ router.post("/login", async (req, res) => {
         .status(400)
         .json({ message: "Please enter your username and password" });
     }
-
     // lookup username in database, return error msg if not found
     const foundUser = await DB.User.findOne({ username: req.body.username });
     if (!foundUser) {
@@ -155,21 +124,16 @@ router.post("/login", async (req, res) => {
         .status(400)
         .json({ message: "Username or password is incorrect" });
     }
-
     // check if password entered matches foundUser's password
     const passwordsMatch = await bcrypt.compare(req.body.password, foundUser.password);
     if (!passwordsMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
-
     // create new session for logged in user
     req.session.currentUser = foundUser._id;
     req.session.createdAt = new Date().toDateString();
     req.session.user = foundUser;
     res.json({ foundUser });
-
-    console.log(req.session);
-    console.log(req.sessionID);
   } catch (err) {
     return res.status(400).json({ error: err });
   }
@@ -182,15 +146,12 @@ router.delete('/logout', (req, res) => {
   if (!req.session.currentUser) {
     return res.status(401).json({ message: 'Unauthorized, please login and try again' })
   }
-
   req.session.destroy((err) => {
     if (err) return res.status(400).json(err);
-
     res.json({ message: 'Successfully logged out' , status: 200});
-    // res.redirect('/login');
   });  
 });
 
-//————————————————————————————— Export —————————————————————————————//
+//————————————————————————————— Export Module —————————————————————————————//
 
 module.exports = router;

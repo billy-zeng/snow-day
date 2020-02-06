@@ -1,40 +1,30 @@
-console.log("maingallery JS connected...");
+//———————————————————————— Variables ————————————————————————//
 
 const logoutButton = document.getElementById("logout");
-
-logoutButton.addEventListener("click", event => {
-  fetch("/api/v1/users/logout", {
-    method: "DELETE"
-  })
-    .then(dataStream => dataStream.json())
-    .then(data => {
-      if (data.status === 200) {
-        window.location = "/";
-      } else console.log(data);
-    })
-    .catch(err => console.log(err));
-});
-
 const cardGallery = document.getElementById("cardGallery");
 
-// fetch to get all resort data
+//———————————————————————— Functions ————————————————————————//
+
+// Fetch all resort data on page load
 fetch("/api/v1/resorts", {
   method: "GET"
 })
   .then(dataStream => dataStream.json())
   .then(dataObj => {
-    console.log(dataObj);
     render(dataObj.foundResorts);
   })
   .catch(err => console.log(err));
 
+// Render resort card templates to the DOM
 function render(resortsArr) {
   resortsArr.map(resort => {
     getTemplate(resort);
   });
 }
 
+// Generate card templates for each resort
 function getTemplate(resortObj) {
+  // Fetch recent snowdepth data 
   fetch(`/api/v1/weather/snowdepth/${resortObj.lat}/${resortObj.lng}`, {
     method: "GET",
     headers: {
@@ -43,10 +33,6 @@ function getTemplate(resortObj) {
   })
     .then(snowdepthDataStream => snowdepthDataStream.json())
     .then(snowdepthDataObj => {
-      console.log(snowdepthDataObj);
-      console.log(resortObj);
-
-      // break this out into another function?
       const cardTemplate = `
         <div id="${resortObj._id}" class="ui accordion gallery-card">
           <div class="title">
@@ -142,11 +128,13 @@ function getTemplate(resortObj) {
         </div>
       `;
 
+      // Append template to the DOM
       cardGallery.insertAdjacentHTML("beforeend", cardTemplate);
+      // Set default toggle boxes
       setToggleBox(resortObj._id);
-
+      // Get weather forecast data
       getAverageTemp(resortObj);
-
+      // Refreshes for Semantic UI 
       $(".ui.accordion").accordion("refresh");
       $(".checkbox").checkbox("refresh");
     })
@@ -155,6 +143,7 @@ function getTemplate(resortObj) {
 
 // calculates average daily temperature forecast for the upcoming week
 function getAverageTemp(resortObj) {
+  // Fetch weather forecast data
   fetch(`/api/v1/weather/temperature/${resortObj.lat}/${resortObj.lng}`, {
     method: "GET",
     headers: {
@@ -163,33 +152,24 @@ function getAverageTemp(resortObj) {
   })
     .then(temperatureDataStream => temperatureDataStream.json())
     .then(temperatureDataObj => {
-      console.log(temperatureDataObj);
       let tempSum = 0;
       temperatureDataObj.response[0].periods.forEach(day => {
         tempSum += day.avgTempF;
       });
       const avgTemperature = Math.round(tempSum / 7);
-      document
-        .getElementById(`temperature_${resortObj._id}`)
-        .insertAdjacentHTML("afterbegin", avgTemperature);
-
+      // Append average temperature value to the resort card template
+      document.getElementById(`temperature_${resortObj._id}`).insertAdjacentHTML("afterbegin", avgTemperature);
       // logic to determine if we should append sun icon
       const snowdepth = document.getElementById(`snowdepth_${resortObj._id}`);
       if (parseInt(snowdepth.innerText) > 20 && avgTemperature < 35) {
-        document
-          .getElementById(`titleBar_${resortObj._id}`)
-          .insertAdjacentHTML(
-            "beforeend",
-            '<i class="right floated sun outline icon"></i>'
-          );
+        document.getElementById(`titleBar_${resortObj._id}`).insertAdjacentHTML("beforeend", '<i class="right floated sun outline icon"></i>');
       }
     })
     .catch(err => console.log(err));
 }
 
-// sets toggle boxes of resorts that are already in user's userResort array to CHECKED
+// Sets toggle boxes of resorts that are already in user's userResort array to CHECKED
 function setToggleBox(resortId){
-  console.log(resortId);
   fetch('/api/v1/users/userResorts', {
     method: "GET",
     headers: {
@@ -199,26 +179,17 @@ function setToggleBox(resortId){
   })
     .then((userResortsDataStream) => userResortsDataStream.json())
     .then((userResorts) => {
-      console.log(userResorts.data);
       const resortIdArr = userResorts.data.map((userResort) => {
         return userResort._id;
       })
-      console.log(resortIdArr);
-
       if(resortIdArr.includes(resortId)){
-        // document.getElementById(`toggleBox_${resortId}`).classList.add('checked');
-        // document.getElementById(`checkbox_${resortId}`).setAttribute('checked', "");
         $(`#toggleBox_${resortId}`).checkbox("check");
-
-        console.log(resortId);
-      } else {
-        console.log("not in this user's resorts")
       }
     })
     .catch(err => console.log(err));
 }
 
-// adds resort to user's saved resorts
+// Add resort to user's saved resorts
 function addResort(resortId){
   fetch(`/api/v1/users/userResorts/${resortId}`, {
     method: "PUT",
@@ -227,11 +198,10 @@ function addResort(resortId){
       credentials: "include"
     }
   })
-    .then(updatedUser => updatedUser.json())
-    .then(updatedUserObj => console.log(updatedUserObj))
     .catch(err => console.log(err));
 }
 
+// Remove resort from user's saved resorts
 function removeResort(resortId) {
   fetch(`/api/v1/users/userResorts/${resortId}`, {
     method: "DELETE",
@@ -240,47 +210,39 @@ function removeResort(resortId) {
       credentials: "include"
     }
   })
-    .then(updatedUser => updatedUser.json())
-    .then(updatedUserObj => console.log(updatedUserObj))
     .catch(err => console.log(err));
 }
 
-/* Semantic UI  */
+//———————————————————————— Semantic UI ————————————————————————//
+
 $(".ui.accordion").accordion();
 $(".checkbox").checkbox("attach events", ".toggle.button");
 $(".checkbox").checkbox("attach events", ".check.button", "check");
 $(".checkbox").checkbox("attach events", ".uncheck.button", "uncheck");
 
-// $("body").on("click", ".checkbox > label", event => {
-//   console.log(event.target);
-//   console.log(event.target.previousElementSibling.checked);
-//   // console.log(event.target.previousElementSibling);
-//   let targetResortId = event.target.previousElementSibling.dataset.resortid;
-//   console.log(targetResortId);
-//   if (event.target.previousElementSibling.checked) {
-//     addResort(targetResortId);
-//   } else {
-//     removeResort(targetResortId);
-//   }
-// });
+//———————————————————————— Event Listeners ————————————————————————//
 
+// Toggle box event listener
 $("body").on("click", ".checkbox", event => {
   const $parent = $(event.target).closest(".gallery-card");
   const $checkbox = $parent.find('input')[0];
-  const $labelParent = $(event.target).parent("div");
-  // console.log($parent);
-  // console.log($parent.attr("id"));
-  // console.log($checkbox);
-  console.log(event.target)
-  console.log($checkbox.checked)
-  // if (!event.target.checked || !$labelParent.checked) {
-
+  // Add or remove resort depending on current state of toggle box
   if ($checkbox.checked) {
-    // console.log($parent.attr("id"));
     addResort($parent.attr("id"));
   } else {
     removeResort($parent.attr("id"));
   }
 });
 
-// ${snowdepthDataObj.response.periods[0].snowDepthIN}" --- SNOW DEPTH value; removed for testing
+// Logout button event listener
+logoutButton.addEventListener("click", event => {
+  fetch("/api/v1/users/logout", {
+    method: "DELETE"
+  })
+    .then(dataStream => dataStream.json())
+    .then(data => {
+      if (data.status === 200) window.location = "/";
+    })
+    .catch(err => console.log(err));
+});
+
