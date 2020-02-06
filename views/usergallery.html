@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- External JS -->
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"
+    ></script>
+    <script defer src="/vendor/semantic.js"></script>
+    <!-- Internal JS -->
+    <script defer src="/scripts/usergallery.js"></script>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/vendor/semantic.css" />
+    <!-- Internal CSS -->
+    <link rel="stylesheet" href="/styles/galleries.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="icon" type="image/png" href="/images/favicon-white.png" />
+    <title>SnowDay | Resorts</title>
+  </head>
+
+  <body>
+    <header class="ui menu stackable top-nav">
+      <div class="header item">SnowDay<i class="snowflake icon"></i></div>
+      <nav class="item right">
+        <div class="ui fluid buttons">
+          <a href="maingallery" class="ui button">All Resorts</a>
+          <a href="usergallery" class="ui button">My Resorts</a>
+          <a href="#" class="ui button" id="logout">Log Out</a>
+        </div>
+      </nav>
+    </header>
+    <section id="cardGallery"></section>
+    <div id="theModal" class="ui basic modal" data-resort="null">
+      <section class="credentials">
+        <div class="ui segment">
+          <p class="modal-text">Remove from My Resorts?</p>
+        </div>
+        <div class="ui two item menu">
+          <a class="ui approve button item" href="#"
+            ><i class="check icon large green"></i
+          ></a>
+          <a class="ui cancel button item" href="#"
+            ><i class="close icon large red"></i
+          ></a>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

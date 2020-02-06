@@ -1,0 +1,88 @@
+:root {
+  /* Colors https://bit.ly/2S91JEl */
+  --bg: #eef2f1;
+  --card: #c9dce3;
+  --bar: #2d495f;
+  --border: #1f313f;
+  --logotext: #0e1b24;
+}
+body {
+  background-image: url("/images/bg5.jpeg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+header .header {
+  font-family: "Pacifico", cursive;
+  font-size: 28px;
+  color: white;
+  margin-bottom: 0;
+}
+header nav {
+  margin: 0 15px 0 0;
+}
+.ui.menu.top-nav {
+  border-radius: 0px;
+  background: var(--bar);
+}
+.ui.menu.top-nav .item {
+  color: white;
+}
+
+.resortpane {
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 2.5px 2.5px 10px rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.test-zone {
+  padding: 10px;
+}
+.ui .card {
+  box-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
+}
+.ui.centered.header {
+  margin: 0px;
+}
+.ui.mini.statistic {
+  margin-bottom: 0px;
+}
+.ui.tiny.horizontal.statistic {
+  margin: 0px;
+}
+.logoblock h1 {
+  font-family: "Pacifico", cursive;
+  font-size: 40px;
+  color: white;
+}
+.logoblock {
+  padding: 15px 5px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  height: 100px;
+  background-color: var(--bar);
+  border-radius: 5px;
+}
+.modal-text {
+  color: black;
+  text-align: center;
+  font-size: 20px;
+}
+#cardGallery {
+  padding: 0 10px;
+}
+
+@media only screen and (max-width: 500px) {
+  header {
+    padding: 0 10px;
+  }
+  .ui.menu.top-nav .item {
+    padding: 0;
+    margin: 6px;
+  }
+  .ui.tiny.horizontal.statistic {
+    margin: 0 auto;
+  }
+}

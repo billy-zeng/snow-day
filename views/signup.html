@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- External JS -->
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"
+    ></script>
+    <script defer src="/vendor/semantic.js"></script>
+    <!-- Internal JS -->
+    <script src="/scripts/signup.js" defer></script>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/vendor/semantic.css" />
+    <!-- Internal CSS -->
+    <link rel="stylesheet" href="/styles/signup.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="icon" type="image/png" href="/images/favicon-white.png" />
+    <title>SnowDay | Register</title>
+  </head>
+  <body>
+    <section class="credentials">
+      <section class="logoblock">
+        <h1>SnowDay<i class="snowflake outline icon"></i></h1>
+      </section>
+
+      <h3>Register your account:</h3>
+      <div class="ui divider"></div>
+
+      <form class="ui large form" id="signupForm">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Username"
+              data-name="username"
+            />
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="envelope icon"></i>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="E-mail"
+              data-name="email"
+            />
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              data-name="password"
+            />
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="check circle icon"></i>
+            <input
+              type="password"
+              id="passwordConfirm"
+              name="passwordConfirm"
+              placeholder="Confirm Password"
+              data-name="passwordConfirm"
+            />
+          </div>
+        </div>
+        <div id="skill" class="field">
+          <div class="ui fluid icon selection dropdown">
+            <i id="star" class="star icon default"></i>
+            <span id="skillDefault" class="text default"
+              >Select Skill Level</span
+            >
+            <div class="menu">
+              <div class="item skill">
+                Beginner
+              </div>
+              <div class="item skill">
+                Intermediate
+              </div>
+              <div class="item skill">
+                Expert
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ui divider"></div>
+
+        <button class="ui button fluid" type="submit">Register</button>
+
+        <div class="ui error message" id="errorZone"></div>
+      </form>
+    </section>
+  </body>
+</html>

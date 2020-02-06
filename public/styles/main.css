@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css?family=Pacifico&display=swap");
+:root {
+  /* Colors https://bit.ly/2S91JEl */
+  --bg: #eef2f1;
+  --card: #c9dce3;
+  --bar: #2d495f;
+  --border: #1f313f;
+  --logotext: #0e1b24;
+}
+
+button {
+  margin: 5px 0px;
+}
+.input-error {
+  background-color: #f8d7da;
+  border: 2px solid #721c24;
+}
+
+.error-message {
+  font-size: 12px;
+  line-height: 16px;
+  text-indent: 6px;
+  color: #b00f0b;
+}
+
+.alert {
+  margin: 0;
+}
+
+.alert p {
+  margin: 0;
+}
+.logoblock {
+  padding: 15px 5px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  height: 100px;
+  background-color: var(--bar);
+  border-radius: 5px;
+}
+.logoblock h1 {
+  font-family: "Pacifico", cursive;
+  font-size: 45px;
+  color: white;
+}
+.credentials {
+  box-sizing: border-box;
+  margin: 30px auto;
+  padding: 15px;
+  width: 400px;
+  border-radius: 5px;
+  background-color: var(--bg);
+  box-shadow: 2.5px 2.5px 10px rgba(0, 0, 0, 0.5);
+}
