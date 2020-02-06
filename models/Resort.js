@@ -15,7 +15,6 @@ const ResortSchema = new mongoose.Schema({
   phoneNumber: String,
   images: [String],
   reviews: [Review.schema]
-  // favCount: Number,
 });
 
 const Resort = mongoose.model("Resort", ResortSchema);

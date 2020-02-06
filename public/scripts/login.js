@@ -1,6 +1,6 @@
 const loginForm = document.getElementById('loginForm');
 
-// Submit Event Listener
+// Login Submit Event Listener
 loginForm.addEventListener("submit", handleLoginSubmit);
 
 $(".ui.form").form({
@@ -26,13 +26,13 @@ $(".ui.form").form({
   }
 });
 
-// Handle Login Submit
+// Handle Login Submit (Create new session)
 function handleLoginSubmit(event) {
-  event.preventDefault();   // prevent default page refresh
-  const userData = {};    // user data object
-
+  event.preventDefault();
+  const userData = {};
+  // if all input forms are valid, post request to create new user session
   if ($(".ui.form").form("is valid")) {
-    const formInputs = [...loginForm.elements];    // array of input form elements
+    const formInputs = [...loginForm.elements];
     formInputs.forEach((input) => {
       userData[input.name] = input.value;
     });
@@ -52,6 +52,7 @@ function handleLoginSubmit(event) {
         } 
       })
       .catch(err => {
+        // return error message if username or password do not match any existing account
         $('#errorZone').empty();
         $('#errorZone').css('display', 'block');
         $('#errorZone').prepend('<ul class="list"><li>Username or password incorrect. Please try again.</li></ul>');
