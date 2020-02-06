@@ -60,7 +60,7 @@ SnowDay is a website that makes it possible to quickly assess conditions at your
 
 ### Expanded Resort Information
 
-![Resort Expanded](/screenshots/ss_resort_expanded.png)
+![Resort Expanded](/screenshots/ss_resort.png)
 
 ### Confirm Resort Removal Modal
 
