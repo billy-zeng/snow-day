@@ -6,7 +6,6 @@ const userSchema = new Schema({
     type: String,
     minlength: [3, "please choose a user name with at least 3 characters."],
     trim: true
-    //TODO - VALIDATION
   },
 
   email: {
@@ -19,7 +18,6 @@ const userSchema = new Schema({
     type: String,
     minlength: [5, "your password must be at least five characters long."],
     trim: true
-    //TODO - VALIDATION
   },
 
   proficiency: String,
