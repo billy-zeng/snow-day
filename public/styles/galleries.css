@@ -1,5 +1,5 @@
 :root {
-  /* Colors */
+  /* Colors https://bit.ly/2S91JEl */
   --bg: #eef2f1;
   --card: #c9dce3;
   --bar: #2d495f;
@@ -30,16 +30,12 @@ header nav {
 }
 
 .resortpane {
-  /* width: 800px; */
   padding: 10px;
-  /* margin: 100px 10px 0; */
   border-radius: 5px;
   box-shadow: 2.5px 2.5px 10px rgba(0, 0, 0, 0.5);
   background-color: rgba(0, 0, 0, 0.5);
 }
-/* .resort-info {
-  background-color: var(--card);
-} */
+
 .test-zone {
   padding: 10px;
 }
@@ -73,6 +69,9 @@ header nav {
   color: black;
   text-align: center;
   font-size: 20px;
+}
+#cardGallery {
+  padding: 0 10px;
 }
 
 @media only screen and (max-width: 500px) {

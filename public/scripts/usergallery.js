@@ -64,15 +64,15 @@ function render(resortsArr) {
 
 // Generate card templates for each resort
 function getTemplate(resortObj) {
-  // Fetch recent snowdepth data 
+  // Fetch recent snowdepth data
   fetch(`/api/v1/weather/snowdepth/${resortObj.lat}/${resortObj.lng}`, {
-     method: 'GET',
-     headers: {
-       "Content-Type": "application/json",
-     }
-   })
-     .then((snowdepthDataStream) => snowdepthDataStream.json())
-     .then((snowdepthDataObj) => {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(snowdepthDataStream => snowdepthDataStream.json())
+    .then(snowdepthDataObj => {
       const cardTemplate = `
         <div id="${resortObj._id}" class="ui accordion gallery-card">
           <div class="title">
@@ -158,7 +158,7 @@ function getTemplate(resortObj) {
                     >
                     <div class="ui item toggle checkbox checked">
                       <input type="checkbox" name="favorite" data-resortid="${resortObj._id}" checked/>
-                      <label>Favorite</label>
+                      <label class="favorite">Favorite</label>
                     </div>
                   </div>
                 </div>
@@ -171,11 +171,11 @@ function getTemplate(resortObj) {
       cardGallery.insertAdjacentHTML("beforeend", cardTemplate);
       // Get weather forecast data
       getAverageTemp(resortObj);
-      // Refreshes for Semantic UI 
+      // Refreshes for Semantic UI
       $(".ui.accordion").accordion("refresh");
       $(".checkbox").checkbox("refresh");
     })
-    .catch((err) => console.log(err));
+    .catch(err => console.log(err));
 }
 
 // calculates average daily temperature forecast for the upcoming week
@@ -195,11 +195,18 @@ function getAverageTemp(resortObj) {
       });
       const avgTemperature = Math.round(tempSum / 7);
       // Append average temperature value to the resort card template
-      document.getElementById(`temperature_${resortObj._id}`).insertAdjacentHTML("afterbegin", avgTemperature);
+      document
+        .getElementById(`temperature_${resortObj._id}`)
+        .insertAdjacentHTML("afterbegin", avgTemperature);
       // logic to determine if we should append sun icon
       const snowdepth = document.getElementById(`snowdepth_${resortObj._id}`);
       if (parseInt(snowdepth.innerText) > 20 && avgTemperature < 30) {
-        document.getElementById(`titleBar_${resortObj._id}`).insertAdjacentHTML("beforeend",'<i class="right floated sun outline icon"></i>');
+        document
+          .getElementById(`titleBar_${resortObj._id}`)
+          .insertAdjacentHTML(
+            "beforeend",
+            '<i class="right floated sun outline icon"></i>'
+          );
       }
     })
     .catch(err => console.log(err));
@@ -213,8 +220,7 @@ function removeResort(resortId) {
       "Content-Type": "application/json",
       credentials: "include"
     }
-  })
-    .catch(err => console.log(err));
+  }).catch(err => console.log(err));
 }
 
 //———————————————————————— Semantic UI ————————————————————————//
