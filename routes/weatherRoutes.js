@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get("/snowdepth/:lat/:lng", (req, res) => {
   try {
-    fetch(`https://api.aerisapi.com/winter/snowdepth/${req.params.lat},${req.params.lng}?client_id=Zc6ukuD2NZWLcVQhjTnKx&client_secret=WtzA8Yipil9TNFiwtuvck2TTu1NeLUTZwAs8GsCG`, {
+    fetch(`https://api.aerisapi.com/winter/snowdepth/${req.params.lat},${req.params.lng}?client_id=BJtdCsVKHnuCQ0ki2Kd6j&client_secret=LVcQ7wfZMDtvvjT2izyWcom9R0X9zLzGrTwZj86a`, {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
@@ -28,7 +28,7 @@ router.get("/snowdepth/:lat/:lng", (req, res) => {
 
 router.get("/temperature/:lat/:lng", (req, res) => {
   try {
-    fetch(`https://api.aerisapi.com/forecasts/${req.params.lat},${req.params.lng}?format=json&filter=day&limit=7&client_id=Zc6ukuD2NZWLcVQhjTnKx&client_secret=WtzA8Yipil9TNFiwtuvck2TTu1NeLUTZwAs8GsCG`, {
+    fetch(`https://api.aerisapi.com/forecasts/${req.params.lat},${req.params.lng}?format=json&filter=day&limit=7&client_id=BJtdCsVKHnuCQ0ki2Kd6j&client_secret=LVcQ7wfZMDtvvjT2izyWcom9R0X9zLzGrTwZj86a`, {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
