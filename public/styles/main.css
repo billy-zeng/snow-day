@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Pacifico&display=swap");
 :root {
-  /* Colors https://www.colourlovers.com/palette/1577297/Icey_forest*/
+  /* Colors https://bit.ly/2S91JEl */
   --bg: #eef2f1;
   --card: #c9dce3;
   --bar: #2d495f;
@@ -48,7 +48,6 @@ button {
   box-sizing: border-box;
   margin: 30px auto;
   padding: 15px;
-  /* height: 800px; */
   width: 400px;
   border-radius: 5px;
   background-color: var(--bg);
