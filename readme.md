@@ -40,7 +40,7 @@ SnowDay is a website that makes it possible to quickly assess conditions at your
 - The ability for users to leave comments or ratings on individual resorts.
 - A display on each resort that indicates how many users have added it as a favorite.
 
-## —— Screen Shots ——
+## —— Screenshots ——
 
 ### Homepage
 
