@@ -1,7 +1,8 @@
 const express = require("express");
-// const fetch = require('node-fetch');
 const router = express.Router();
 const DB = require("../models");
+
+// routes start at localhost:4000/api/v1/resorts
 
 //———————————————————————————— Index ————————————————————————————//
 
@@ -68,22 +69,5 @@ router.post("/:id/reviews", async (req, res) => {
   }
 });
 
-// //————————————————————————————— Delete (For Testing) —————————————————————————————//
-
-// router.delete("/:id", async (req, res) => {
-//   try {
-//     const deletedResort = await DB.Resort.findByIdAndDelete(req.params.id);
-//     const resObj = {
-//       status: 200,
-//       data: deletedResort,
-//       requestedAt: new Date().toLocaleString()
-//     };
-//     res.status(200).json(resObj);
-//   } catch (err) {
-//     return res.status(400).json({ message: "something went wrong!", err: err });
-//   }
-// });
-
-//—————————————————————————————Export—————————————————————————————//
-
+//————————————————————————————— Export Module —————————————————————————————//
 module.exports = router;
