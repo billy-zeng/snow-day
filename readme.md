@@ -2,6 +2,8 @@
 
 SnowDay is a website that makes it possible to quickly assess conditions at your favorite California Ski Resorts, and gives direct access to ticketing and contact information per resort.
 
+https://sei7snowday.herokuapp.com/
+
 ## —— Technologies Used ——
 
 - JavaScript
